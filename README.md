@@ -3,18 +3,20 @@
 
 ### How to use.
 
-* environments:
-*Environments:* Python3.6, Tensorflow1.14.0
-*Neccessary python libaries:* numpy, opencv-python, argparse, scikit-learn,openpyxl
+* **environments:** Python3.6, Tensorflow1.14.0
 
-Take *Task1.1 PieNumber* as an example. 
+* **Neccessary python libaries:** numpy, opencv-python, argparse, scikit-learn,openpyxl
+
+* Take **Task1.1 PieNumber** as an example. 
 
 First, create your own datasets. The following command will create a 'datasets' folder in current path.
+
 '''
 python3.6 Dataset_generator.py
 '''
 
 Second, run a network. This command will train and test the 'IRN_m' network. When training step is finished, the training informations, best model and the predicted results can be obtained in folder './results/IRN_m'.
+
 '''
 python3.6 Dataset_generator.py
 '''
