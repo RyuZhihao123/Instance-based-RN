@@ -11,15 +11,15 @@
 
 First, create your own datasets. The following command will create a 'datasets' folder in current path.
 
-'''
+```
 python3.6 Dataset_generator.py
-'''
+```
 
 Second, run a network. This command will train and test the 'IRN_m' network. When training step is finished, the training informations, best model and the predicted results can be obtained in folder './results/IRN_m'.
 
-'''
-python3.6 Dataset_generator.py
-'''
+```
+python3.6 Net_IRNm.py
+```
 
 ### Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
