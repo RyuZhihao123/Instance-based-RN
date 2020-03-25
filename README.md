@@ -23,14 +23,14 @@ python3.6 Net_IRNm.py
 
 **Details**: (1) Train/val/test sets contains 60000/20000/20000 charts respectively. We use Adam optimizer (lr =0.0001). (2) During training, we shuffle the datasets for each epoch, and only save the best model which gets the lowest mse loss on validation set.
 
+**Notice**: In rare cases, if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam can get a way low loss value even during the first epoch.
+
 ### Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
 * **Task1.1: PieNumber.**
 
 > `The range of object number` are different between training and testing sets in this task. By default, each pie chart in training sets contains 3 to 6 pie sectors, while the charts in testing sets contain 7 to 9 pie sectors.
-
-> 'Notice:' In rare cases, the loss of 'IRN_m' may keep about 0.37 during the first epoch, please kill it and restart the program.
 
 * **Task1.2: PieLineWidth.**
 
