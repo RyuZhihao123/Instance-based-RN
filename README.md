@@ -19,10 +19,9 @@
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
-* **Task1.1: Position-Angle-Barchart.**
-* **Task1.2: Position-Angle-Piechart.**
-* **Task1.3: Position-Length.**
-* **Task1.4: Point-Cloud.**
+* **Task2.1: Position-Angle.**
+* **Task2.2: Position-Length.**
+* **Task2.3: Point-Cloud.**
 
 
 ## How to use.
