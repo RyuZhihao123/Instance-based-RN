@@ -7,7 +7,7 @@
 
 * **Neccessary python libaries:** numpy, opencv-python, argparse, scikit-learn,openpyxl
 
-* Take **Task1.1 PieNumber** as an example. 
+Here, I'll take **Task1.1 PieNumber** as an example. 
 
 First, create your own datasets. The following command will create a 'datasets' folder in current path.
 
