@@ -1,6 +1,25 @@
 # Instance-based-RN
 
-## Experiments1: Our new tasks. 
+
+### How to use.
+
+* environments:
+*Environments:* Python3.6, Tensorflow1.14.0
+*Neccessary python libaries:* numpy, opencv-python, argparse, scikit-learn,openpyxl
+
+Take *Task1.1 PieNumber* as an example. 
+
+First, create your own datasets. The following command will create a 'datasets' folder in current path.
+'''
+python3.6 Dataset_generator.py
+'''
+
+Second, run a network. This command will train and test the 'IRN_m' network. When training step is finished, the training informations, best model and the predicted results can be obtained in folder './results/IRN_m'.
+'''
+python3.6 Dataset_generator.py
+'''
+
+### Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
 * **Task1.1: PieNumber.**
@@ -18,13 +37,11 @@
 > In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
 
-## Experiments2: ClevelandMcGill
+### Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
 * **Task2.1: Position-Angle.**
 * **Task2.2: Position-Length.**
 * **Task2.3: Point-Cloud.**
 
-
-## How to use.
 
