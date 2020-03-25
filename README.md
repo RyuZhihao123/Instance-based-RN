@@ -21,6 +21,8 @@ Second, run a network. This command will train and test the 'IRN_m' network. Whe
 python3.6 Net_IRNm.py
 ```
 
+**Details**: (1) Training/val/testing sets contains 60000/20000/20000 charts. We use Adam optimizer (lr =0.0001). (2) During training, we shuffle the datasets for each epoch, and only save the best model which gets the lowest mse loss on validation set.
+
 ### Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
