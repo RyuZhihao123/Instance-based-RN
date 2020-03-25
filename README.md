@@ -48,4 +48,10 @@ python3.6 Net_IRNm.py
 * **Task2.2: Position-Length.**
 * **Task2.3: Point-Cloud.**
 
+### Experiments3: Supplement 
+
+* **Task3.1: The effect of Non_local_block.**
+* **Task3.2: Can orignal RN be improved by changing its structure?**
+*
+
 
