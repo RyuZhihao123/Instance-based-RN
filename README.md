@@ -23,7 +23,7 @@ python3.6 Net_IRNm.py
 
 **Details**: (1) Train/val/test sets contains 60000/20000/20000 charts respectively. We use Adam optimizer (lr =0.0001). (2) During training, we shuffle the datasets for each epoch, and only save the best model which gets the lowest mse loss on validation set.
 
-**Notice**: In rare cases, if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam can get a way low loss value even during the first epoch.
+**Notice**: In rare cases (very low probability), if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam could usually get a way low loss value even during the first epoch.
 
 ### Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
