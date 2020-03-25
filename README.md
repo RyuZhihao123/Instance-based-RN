@@ -7,6 +7,8 @@
 
 > `The range of object number` are different between training and testing sets in this task. By default, each pie chart in training sets contains 3 to 6 pie sectors, while the charts in testing sets contain 7 to 9 pie sectors.
 
+> 'Notice:' In rare cases, the loss of 'IRN_m' may keep about 0.37 during the first epoch, please kill it and restart the program.
+
 * **Task1.2: PieLineWidth.**
 
 > `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3.
