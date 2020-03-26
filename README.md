@@ -32,15 +32,21 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ## Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
-* **Task1.1: PieNumber.** [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
+### Task1.1: PieNumber.
+
+[Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
 
 > `The range of object number` are different between training and testing sets in this task. By default, each pie chart in training sets contains 3 to 6 pie sectors, while the charts in testing sets contain 7 to 9 pie sectors.
 
-* **Task1.2: PieLineWidth.** [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
+### Task1.2: PieLineWidth.
+
+[Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
 
 > `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3.
 
-* **Task1.3: Pie3_12.**  [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
+### Task1.3: Pie3_12.
+
+[Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
 
 > In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
@@ -48,13 +54,13 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
-* **Task2.1: Position-Angle.** 
+### Task2.1: Position-Angle.
 
 Codes: 
 [[Bar charts]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Bar) 
 [[Pie charts]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Pie)
 
-* **Task2.2: Position-Length.**
+### Task2.2: Position-Length.
 
 Codes: 
 [[MULTI]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_multi) 
@@ -64,7 +70,7 @@ Codes:
 [[Type4]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type4)
 [[Type5]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type5)
 
-* **Task2.3: Point-Cloud.**
+### Task2.3: Point-Cloud.
 
 Codes: 
 [[Num10]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_10) 
@@ -74,8 +80,8 @@ Codes:
 
 ## Experiments3: Supplement 
 
-* **Task3.1: The effect of Non_local_block.**
-* **Task3.2: Can orignal RN be improved by changing its structure?**
-*
+### Task3.1: The effect of Non_local_block.
+### Task3.2: Can orignal RN be improved by changing its structure?
+###
 
 
