@@ -1,5 +1,8 @@
 # Instance-based-RN
 
+We designed the **IRN_m network** for those multi-objects ratio tasks, and **IRN_p network** for pair-ratio estimation tasks. 
+
+Because I didn't tidy up my codes before, even though I have tested new codes on small datasets, there may be some error in current code. If you meet some bugs, please tell me  thanks (^,^). My email: liuzh96@outlook.com
 
 ## How to use.
 
