@@ -7,7 +7,7 @@
 
 * **Neccessary python libaries:** numpy, opencv-python, argparse, scikit-learn,openpyxl
 
-Here, I'll take **Task1.1 PieNumber** as an example to show how to use the codes.
+Here, I'll take **Task1.1 PieNumber [codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) ** as an example to show how to use the codes.
 
 First, create your own datasets. The following command will create a 'datasets' folder in current path.
 
