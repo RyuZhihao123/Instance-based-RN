@@ -32,7 +32,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ## Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
-#### Task1.1: PieNumber.
+### Task1.1: PieNumber.
 
 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
 
@@ -40,7 +40,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
 
-#### Task1.2: PieLineWidth.
+### Task1.2: PieLineWidth.
 
 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
 
@@ -48,7 +48,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png)
 
-#### Task1.3: Pie3_12.
+### Task1.3: Pie3_12.
 
 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
 
@@ -59,7 +59,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
-#### Task2.1: Position-Angle.
+### Task2.1: Position-Angle.
 
 Codes: 
 [[Bar charts]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Bar) 
@@ -67,7 +67,7 @@ Codes:
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_angle.png)
 
-#### Task2.2: Position-Length.
+### Task2.2: Position-Length.
 
 Codes: 
 [[MULTI]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_multi) 
@@ -79,7 +79,7 @@ Codes:
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_multi.png)
 
-#### Task2.3: Point-Cloud.
+### Task2.3: Point-Cloud.
 
 Codes: 
 [[Num10]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_10) 
@@ -89,8 +89,8 @@ Codes:
 
 ## Experiments3: Supplement 
 
-#### Task3.1: The effect of Non_local_block.
-#### Task3.2: Can orignal RN be improved by changing its structure?
-####
+### Task3.1: The effect of Non_local_block.
+### Task3.2: Can orignal RN be improved by changing its structure?
+###
 
 
