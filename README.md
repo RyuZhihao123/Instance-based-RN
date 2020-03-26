@@ -1,7 +1,7 @@
 # Instance-based-RN
 
 
-### How to use.
+## How to use.
 
 * **environments:** Python3.6, Tensorflow1.14.0
 
@@ -41,14 +41,14 @@ python3.6 Net_IRNm.py
 > In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
 
-### Experiments2: ClevelandMcGill
+## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
 * **Task2.1: Position-Angle.**
 * **Task2.2: Position-Length.**
 * **Task2.3: Point-Cloud.**
 
-### Experiments3: Supplement 
+## Experiments3: Supplement 
 
 * **Task3.1: The effect of Non_local_block.**
 * **Task3.2: Can orignal RN be improved by changing its structure?**
