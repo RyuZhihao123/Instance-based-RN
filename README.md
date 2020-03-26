@@ -39,7 +39,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
 
-> `The range of object number` are different between training and testing sets in this task. By default, each pie chart in training sets contains 3 to 6 pie sectors, while the charts in testing sets contain 7 to 9 pie sectors.
+> `The range of object number` are different between training and testing sets in this task. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors.
 
 > **We found only our IRN_m and IRN_p can get a good results on testing set.** 
 
