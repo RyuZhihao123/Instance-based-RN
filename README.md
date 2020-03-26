@@ -28,7 +28,7 @@ python3.6 Dataset_generator.py
 python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ```
 
-**Details**: 
+**Details:**
 
 (1) Train/val/test sets contains 60000/20000/20000 charts respectively. We use Adam optimizer (lr =0.0001). 
 
@@ -36,7 +36,9 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 (3) Noises were directly added during dataset generalization. And `Position-length` and `Point cloud` exps are the most different from the obvious results when using Adam optimizer.
 
-**Notice**: In rare cases (very low probability), if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam could usually get a way low loss value even during the first epoch.
+**Notice:** 
+
+In rare cases (very low probability), if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam could usually get a way low loss value even during the first epoch.
 
 ## Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
