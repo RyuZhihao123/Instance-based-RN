@@ -2,7 +2,7 @@
 
 We designed the **IRN_m network** for those multi-objects ratio tasks, and **IRN_p network** for pair-ratio estimation tasks. 
 
-Because I didn't tidy up my codes before, even though I have tested new codes on small datasets, there may be some error in current code. If you meet some bugs, please tell me  thanks (^,^). My email: liuzh96@outlook.com
+Since I didn't tidy up my codes before, if you meet any bug, please tell me (liuzh96@outlook.com)  thanks (^,^).
 
 ## How to use.
 
@@ -43,6 +43,8 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
 
+
+
 ### Task1.2: PieLineWidth.
 
 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
@@ -50,6 +52,10 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 > `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3.
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png)
+
+| MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| **IRN_m** |
+| ----- | ----- | ----- | ----- | ----- | ----- | 
+| 内容1 | 内容2 | 内容1 | 内容2 | 内容1 | 内容2 |
 
 ### Task1.3: Pie3_12.
 
