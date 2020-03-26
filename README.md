@@ -38,7 +38,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 > `The range of object number` are different between training and testing sets in this task. By default, each pie chart in training sets contains 3 to 6 pie sectors, while the charts in testing sets contain 7 to 9 pie sectors.
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png | width=600)
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
 
 #### Task1.2: PieLineWidth.
 
@@ -46,7 +46,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 > `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3.
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png | width=600)
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png)
 
 #### Task1.3: Pie3_12.
 
@@ -54,7 +54,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 > In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png | width=600)
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png)
 
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
@@ -65,7 +65,7 @@ Codes:
 [[Bar charts]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Bar) 
 [[Pie charts]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Pie)
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_angle.png | width=600)
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_angle.png)
 
 #### Task2.2: Position-Length.
 
@@ -77,7 +77,7 @@ Codes:
 [[Type4]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type4)
 [[Type5]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type5)
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_multi.png | width=600)
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_multi.png)
 
 #### Task2.3: Point-Cloud.
 
