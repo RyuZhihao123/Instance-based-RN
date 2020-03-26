@@ -34,7 +34,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 (2) During training, we shuffle the datasets for each epoch, and only save the best model which gets the lowest mse loss on validation set.
 
-(3) Noises were directly added during dataset generalization. And `Position-length` and `Point cloud` exps are the most different from the obvious results when using Adam optimizer.
+(3) Noises were directly added during dataset generalization. And `Position-length` and `Point cloud` got the most different values from the obvious results when using Adam optimizer.
 
 **Notice:** 
 
