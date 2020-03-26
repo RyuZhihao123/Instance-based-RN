@@ -25,7 +25,7 @@ python3.6 Net_IRNm.py
 
 **Notice**: In rare cases (very low probability), if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam could usually get a way low loss value even during the first epoch.
 
-### Experiments1: Our new tasks. 
+## Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
 * **Task1.1: PieNumber.** [PieNumber codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
