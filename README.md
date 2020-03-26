@@ -103,6 +103,6 @@ Codes:
 
 ### Task3.1: The effect of Non_local_block.
 ### Task3.2: Can orignal RN be improved by changing its structure?
-###
+### Task3.3: How would RN perform when the objects are segmented directly rather than extracted by CNN.
 
 
