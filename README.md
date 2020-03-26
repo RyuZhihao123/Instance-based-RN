@@ -58,6 +58,7 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
 
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png)
 
 ### Task1.2: PieLineWidth.
 
