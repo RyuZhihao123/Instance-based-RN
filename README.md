@@ -28,11 +28,11 @@ python3.6 Net_IRNm.py
 ### Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
-* **Task1.1: PieNumber.**
+* **Task1.1: PieNumber.** [PieNumber codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
 
 > `The range of object number` are different between training and testing sets in this task. By default, each pie chart in training sets contains 3 to 6 pie sectors, while the charts in testing sets contain 7 to 9 pie sectors.
 
-* **Task1.2: PieLineWidth.**
+* **Task1.2: PieLineWidth.** [PieLineWidth codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
 
 > `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3.
 
