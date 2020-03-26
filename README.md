@@ -41,12 +41,15 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 > `The range of object number` are different between training and testing sets in this task. By default, each pie chart in training sets contains 3 to 6 pie sectors, while the charts in testing sets contain 7 to 9 pie sectors.
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
+> **We found only our IRN_m and IRN_p can get a good results on testing set.** 
 
 | MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| IRN_m (!!!) |
 | ----- | ----- | ----- | ----- | -----| ----- |
-| Train set | 0.00023(0.15) | 0.00025(0.17) | 0.00287(1.69) | 0.00015(-0.56) | 0.00010(-0.57) |
-| Test set | 0.13811(4.59) | 0.15428(4.81) | 0.16186(4.85) | 0.00087(0.97) | 0.00058(0.81) |
+| Train set | 0.00023(0.15) | 0.00025(0.17) | 0.00287(1.69) | 0.00015(-0.56) | **0.00010(-0.57)** |
+| Test set | 0.13811(4.59) | 0.15428(4.81) | 0.16186(4.85) | 0.00087(0.97) | **0.00058(0.81)** |
+
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
+
 
 ### Task1.2: PieLineWidth.
 
