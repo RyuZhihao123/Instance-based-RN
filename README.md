@@ -22,7 +22,7 @@ python3.6 Dataset_generator.py
 Second, run a network. This command will train and test the 'IRN_m' network. When training step is finished, the training informations(MLAE and MSE etc.), best model(on val sets) and the predicted results can be obtained in folder './results/IRN_m'.
 
 ```
-python3.6 Net_IRNm.py
+python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ```
 
 **Details**: (1) Train/val/test sets contains 60000/20000/20000 charts respectively. We use Adam optimizer (lr =0.0001). (2) During training, we shuffle the datasets for each epoch, and only save the best model which gets the lowest mse loss on validation set.
@@ -48,9 +48,26 @@ python3.6 Net_IRNm.py
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
-* **Task2.1: Position-Angle.**
+* **Task2.1: Position-Angle.** 
+
+Bar charts [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Bar) 
+Pie charts [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Pie)
+
 * **Task2.2: Position-Length.**
+
+MULTI [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_multi) 
+Type1 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type1)
+Type2 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type2)
+Type3 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type3)
+Type4 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type4)
+Type5 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type5)
+
 * **Task2.3: Point-Cloud.**
+
+Num10 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_10) 
+Num100 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_100)
+Num1000 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/4point_cloud_1000)
+
 
 ## Experiments3: Supplement 
 
