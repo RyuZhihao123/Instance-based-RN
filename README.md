@@ -44,6 +44,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
 
 | MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| IRN_m (!!!) |
+| ----- | ----- | ----- | ----- | -----| ----- |
 | Train set | 0.00023(0.15) | 0.00025(0.17) | 0.00287(1.69) | 0.00015(-0.56) | 0.00010(-0.57) |
 | Test set | 0.13811(4.59) | 0.15428(4.81) | 0.16186(4.85) | 0.00087(0.97) | 0.00058(0.81) |
 
