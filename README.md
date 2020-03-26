@@ -8,7 +8,7 @@ Since I didn't tidy up my codes before, if you meet any bug, please tell me (liu
 
 ### 1. Environments:
 
-* **Recommended Env.** Python3.6, Tensorflow1.14.0
+* **Recommended Env.** Python3.6, Tensorflow1.14.0, Keras 2.2.4.
 
 * **Neccessary libaries:** numpy, opencv-python, argparse, scikit-learn,openpyxl
 
