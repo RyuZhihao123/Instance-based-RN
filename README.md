@@ -22,7 +22,7 @@ Here, I'll take **Task1.1 PieNumber** [(codes)](https://github.com/RyuZhihao123/
 python3.6 Dataset_generator.py
 ```
 
-* **Second, run a network.** This command will train and test the 'IRN_m' network. When training step is finished, the training informations(MLAE and MSE etc.), best model(on val sets) and the predicted results can be obtained in folder './results/IRN_m'.
+* **Second, run a network.** This command will train and test the `IRN_m` network. When training step is finished, the training informations(MLAE and MSE etc.), best model(on val sets) and the predicted results can be obtained in folder './results/IRN_m'.
 
 ```
 python3.6 Net_IRNm.py --gpu 2      # GPU ID
