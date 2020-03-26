@@ -3,9 +3,13 @@
 
 ## How to use.
 
-* **environments:** Python3.6, Tensorflow1.14.0
+### 1. Environments:
 
-* **Neccessary python libaries:** numpy, opencv-python, argparse, scikit-learn,openpyxl
+* **Recommended Env.** Python3.6, Tensorflow1.14.0
+
+* **Neccessary libaries:** numpy, opencv-python, argparse, scikit-learn,openpyxl
+
+### 2. Example:
 
 Here, I'll take **Task1.1 PieNumber** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber)  as an example to show how to use the codes.
 
