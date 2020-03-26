@@ -15,7 +15,7 @@ First, create your own datasets. The following command will create a 'datasets' 
 python3.6 Dataset_generator.py
 ```
 
-Second, run a network. This command will train and test the 'IRN_m' network. When training step is finished, the training informations, best model and the predicted results can be obtained in folder './results/IRN_m'.
+Second, run a network. This command will train and test the 'IRN_m' network. When training step is finished, the training informations(MLAE and MSE etc.), best model(on val sets) and the predicted results can be obtained in folder './results/IRN_m'.
 
 ```
 python3.6 Net_IRNm.py
