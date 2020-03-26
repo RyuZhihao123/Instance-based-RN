@@ -39,9 +39,9 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
 
-> `The range of object number` are different between training and testing sets in this task. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors.
+* `The range of object number` are different between training and testing sets in this task. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors.
 
-> **We found only our IRN_m and IRN_p can get a good results on testing set.** 
+* **We found only our IRN_m and IRN_p can get a good results on testing set.** 
 
 | MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| IRN_m (!!!) |
 | ----- | ----- | ----- | ----- | -----| ----- |
@@ -55,7 +55,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
 
-> `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3.
+* `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3.
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png)
 
@@ -64,7 +64,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 [Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
 
-> In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
+* In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png)
 
