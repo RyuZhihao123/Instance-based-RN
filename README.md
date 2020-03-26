@@ -16,13 +16,13 @@ Since I didn't tidy up my codes before, if you meet any bug, please tell me (liu
 
 Here, I'll take **Task1.1 PieNumber** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber)  as an example to show how to use the codes.
 
-* **First, create your own datasets.** The following command will create a 'datasets' folder in current path.
+* **First, create your own datasets.** The following command will create a `./datasets` folder in current path.
 
 ```
 python3.6 Dataset_generator.py
 ```
 
-* **Second, run a network.** This command will train and test the `IRN_m` network. When training step is finished, the training informations(MLAE and MSE etc.), best model(on val sets) and the predicted results can be obtained in folder './results/IRN_m'.
+* **Second, run a network.** This command will train and test the `IRN_m` network. When training step is finished, the training informations(MLAE and MSE etc.), best model(on val sets) and the predicted results can be obtained in folder `./results/IRN_m`.
 
 ```
 python3.6 Net_IRNm.py --gpu 2      # GPU ID
@@ -41,7 +41,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 * `The range of object number` are different between training and testing sets in this task. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors.
 
-* **We found only our IRN_m and IRN_p can get a good results on testing set.** 
+* **We found only our IRN_m and IRN_p can get a good result on testing set.** 
 
 | MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| IRN_m (!!!) |
 | ----- | ----- | ----- | ----- | -----| ----- |
