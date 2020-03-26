@@ -121,7 +121,7 @@ if __name__ == '__main__':
                 num=np.random.randint(min_num_obj, max_num_obj + 1))
 
             if i % 200 == 0:
-                print("   id {} (bar_num = {})".format(i, len(subImages)))
+                print("   id {} (obj_num = {})".format(i, len(subImages)))
 
             cv2.imwrite(dir_charts + config.chartName.format(i), image * 255)
             for t in range(len(subImages)):
