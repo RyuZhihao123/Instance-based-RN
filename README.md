@@ -68,6 +68,13 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png)
 
+* **PieLineWidth is unlike PieNumber whose training and testing sets both have different line width (The appearence domain are same). In PieLineWidth, even segmented objects, look different between the training sets and testing set. However, the result is surprising!! We found that both IRN_p and IRN_m can get a good result in testing set, and IRN_m performs better. That means if we segmeneted objects in advance and directly using CNN to extract their individual features, it does make great effect.** 
+
+| MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
+| ----- | -----  | ----- | -----| ----- |
+| Train set | 0.00038(0.73)  | 0.00441(2.27) | -(-) | **-(-)** |
+| Test set | 0.09503(4.53)  | 0.08425(4.32) | -(-) | **-(-)** |
+
 
 ### Task1.3: Pie3_12.
 
