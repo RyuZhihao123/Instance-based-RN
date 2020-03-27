@@ -43,7 +43,7 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 ## Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
-* For those generalization tasks, we don't use `EarlyStopping`. Because training and testing set are totally independent so that validation loss always changes, it's very difficult to find a suitable min-delta value for validation loss.
+* For those generalization tasks, we didn't use `EarlyStopping` during training. Because training and testing set are totally independent so that validation loss always changes, it's very difficult to find a suitable min-delta value for validation loss. Therefore, I just record the best model with lowest validation loss.
 
 ### Task1.1: PieNumber.
 
