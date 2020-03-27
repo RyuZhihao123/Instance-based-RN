@@ -43,7 +43,7 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 ## Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
-> Notice: If a network can work well on both training and testing set, we choose to save the best model on `validation sets`. However, for pieNumber and pieLineWidth, whose training and testing sets are different,  VGG and RN only works well on training set, so we save their best model on training sets. Because if a network can't work well on testing set, its validation loss would goes jumping up and down.
+> Notice: If a network can work well on both training and testing set, we choose to save the best model on `validation sets`. However, for pieNumber and pieLineWidth, whose training and testing sets are different,  VGG and RN only works well on training set, so we save their best model on training sets. Because if a network can't work well on testing set, its validation loss would tend to jump up and down so that perhaps the network haven't converge on training set but it gives the lowest validation loss.
 
 ### Task1.1: PieNumber.
 
