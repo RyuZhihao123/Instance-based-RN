@@ -189,10 +189,7 @@ if __name__ == '__main__':
         if a.backup == True:   # whether to save the weight after each epoch
             model.save_weights(dir_results + "backup/model_{}_{}.h5".format(iter, val_iter_loss))
 
-        # For generalization task, we save the best model on training set instead of on validation set.
-        # since this network couldn't get good result on validation sets.
-        if train_iter_loss < best_train_loss:
-        #if val_iter_loss < best_val_loss:  # save the best model on Validation set.
+        if val_iter_loss < best_val_loss:  # save the best model on Validation set.
             RemoveDir(best_model_name)
             best_model_name = dir_results + "model_vggseg_{}.h5".format(val_iter_loss)
             model.save_weights(best_model_name)

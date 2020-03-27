@@ -165,10 +165,7 @@ if __name__ == '__main__':
         # if a.backup == True:   # whether to save the weight after each epoch
         #     saver.save(sess, dir_results + "/backup/model_{}_{}.ckpt".format(iter,val_iter_loss))
 
-        # For generalization task, we save the best model on training set instead of on validation set.
-        # since this network couldn't get good result on validation sets.
-        if train_iter_loss < best_train_loss:
-        #if val_iter_loss < best_val_loss:  # save the best model on Validation set.
+        if val_iter_loss < best_val_loss:  # save the best model on Validation set.
             best_model_name = dir_results + "model_RN_{}.ckpt".format(val_iter_loss)
             saver.save(sess, best_model_name)
             best_val_loss = val_iter_loss
