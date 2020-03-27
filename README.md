@@ -43,7 +43,7 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 ## Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
-* For those generalization tasks, we didn't use `EarlyStopping` during training. Because training and testing set are totally independent so that validation loss always changes, it's very difficult to find a suitable min-delta value for validation loss. Therefore, I just record the best model with lowest validation loss.
+* For generalization tasks, we didn't use `EarlyStopping` during training. Because training and testing set are totally independent so that validation loss always changes, it's very difficult to find a suitable min-delta value for validation loss. Therefore, I just record the best model with lowest validation loss.
 
 ### Task1.1: PieNumber.
 
@@ -87,6 +87,11 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 * In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png"/></div>
+
+| MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
+| ----- | -----  | ----- | -----| ----- |
+| Train set | -(-)  | -(-) | 0.00033(0.12) | **-(-)** |
+| Test set | -(-)  | -(-) | 0.00041(0.25) | **-(-)** |
 
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
