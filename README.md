@@ -51,6 +51,10 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 * `The range of object number` are different between training and testing sets. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors. For VGG, RN and IRNm, all the outputs are 9-dim vector.
 
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
+
+![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png)
+
 * **We found only our IRN_m and IRN_p can get a good result on testing set.** 
 
 | MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| IRN_m (!!!) |
@@ -58,9 +62,6 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 | Train set | 0.00023(0.15) | 0.00025(0.17) | 0.00287(1.69) | 0.00015(-0.56) | **0.00010(-0.57)** |
 | Test set | 0.13811(4.59) | 0.15428(4.81) | 0.16186(4.85) | 0.00087(0.97) | **0.00058(0.81)** |
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
-
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png)
 
 ### Task1.2: PieLineWidth.
 
