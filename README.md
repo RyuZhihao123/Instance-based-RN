@@ -47,15 +47,13 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 ### Task1.1: PieNumber.
 
-[Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
+[[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
 
 * `The range of object number` are different between training and testing sets. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors. For VGG, RN and IRNm, all the outputs are 9-dim vector.
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png"/></div>
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
-
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png)
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png"/></div>
 
 * **We found only our IRN_m and IRN_p can get a good result on testing set.** 
 
@@ -67,11 +65,12 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 ### Task1.2: PieLineWidth.
 
-[Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
+[[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
 
 * `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3.
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png)
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png"/></div>
+
 
 * **PieLineWidth is unlike PieNumber whose training and testing sets both have different line width (The appearence domain are same). In PieLineWidth, even segmented objects, look different between the training sets and testing set. However, the result is surprising!! We found that both IRN_p and IRN_m can get a good result in testing set, and IRN_m performs better. That means if we segmeneted objects in advance and directly using CNN to extract their individual features, it does make great effect.** 
 
@@ -83,11 +82,11 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 ### Task1.3: Pie3_12.
 
-[Codes](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
+[[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
 
 * In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png)
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png"/></div>
 
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
@@ -98,7 +97,7 @@ Codes:
 [[Bar charts]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Bar) 
 [[Pie charts]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Pie)
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_angle.png)
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_angle.png"/></div>
 
 ### Task2.2: Position-Length.
 
@@ -110,7 +109,7 @@ Codes:
 [[Type4]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type4)
 [[Type5]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/2position_length_type5)
 
-![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_multi.png)
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_multi.png"/></div>
 
 ### Task2.3: Point-Cloud.
 
