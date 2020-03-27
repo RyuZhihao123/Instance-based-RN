@@ -51,6 +51,8 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 * `The range of object number` are different between training and testing sets. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors. For VGG, RN and IRNm, all the outputs are 9-dim vector.
 
+<div align=center><img width="150" height="150" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png"/></div>
+
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png)
 
 ![Example Image](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png)
