@@ -32,7 +32,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 (1) Train/val/test sets contains 60000/20000/20000 charts respectively. We use Adam optimizer (lr =0.0001). 
 
-(2) During training, we shuffle the datasets for each epoch, and only save the best model which gets the lowest mse loss on validation set.
+(2) During training, we shuffle the datasets for each epoch, and save the best model which gets the lowest mse loss on `validation set`.
 
 (3) Noises were directly added during dataset generalization. And `Position-length` and `Point cloud` got the most different values from the obvious results when using Adam optimizer.
 
@@ -43,7 +43,7 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 ## Experiments1: Our new tasks. 
 (These experiments focus on verifying the generalization ability of networks.)
 
-> Notice: If a network can work well on both training and testing set, we choose to save the best model on `validation sets`. However, for pieNumber and pieLineWidth, whose training and testing sets are different,  VGG and RN only works well on training set, so we save their best model on training sets. Because if a network can't work well on testing set, its validation loss would tend to jump up and down so that perhaps the network haven't converge on training set but it gives the lowest validation loss.
+> Notice: Under normal circumstances, if a network can work well on both training and testing set, we choose to save the best model on their `validation sets`. However, for pieNumber and pieLineWidth, whose training and testing sets have different distribution, VGG and RN only works well on training set, so this time we save their best model on training sets. Because if a network can't work well on testing set, its validation loss would tend to jump up and down, so that perhaps the network haven't yet converged on training set but it gives the lowest validation loss (For example, obatin the lowest validation loss just at the begining).
 
 ### Task1.1: PieNumber.
 
