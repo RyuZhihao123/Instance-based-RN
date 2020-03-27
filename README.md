@@ -62,6 +62,7 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 | Train set | 0.00023(0.15) | 0.00025(0.17) | 0.00287(1.69) | 0.00015(-0.56) | **0.00010(-0.57)** |
 | Test set | 0.13811(4.59) | 0.15428(4.81) | 0.16186(4.85) | 0.00087(0.97) | **0.00058(0.81)** |
 
+![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumberLoss.png)
 
 ### Task1.2: PieLineWidth.
 
