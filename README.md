@@ -87,7 +87,7 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png"/></div>
 
-* According to the following results, we found that even if the number of objects has increased, the performance of IRN_m is still very nice, wheareas VGG and RN seems worse than the condition that number is 3 to 6.
+* **It's clear that VGG and RN performs worse when the number of objects increased, as the following results proved. Whereas, our network, IRN_m can still perform very nice**.
 
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
