@@ -91,8 +91,8 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
-| Train set | -(-)  | -(-) | 0.00033(0.12) | **-(-)** |
-| Test set | -(-)  | -(-) | 0.00041(0.25) | **-(-)** |
+| Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **Not finished, current:0.00021(-)** |
+| Test set | 0.00098(1.29)  | 0.00727(2.56) | 0.00041(0.25) | **Not finished, current:0.00023(-)** |
 
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
