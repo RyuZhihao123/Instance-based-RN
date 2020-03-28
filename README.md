@@ -28,7 +28,7 @@ python3.6 Dataset_generator.py
 python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ```
 
-<div align=center><img width="550" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles.png"/></div>
+<div align=center><img width="650" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles.png"/></div>
 
 **Details:**
 
