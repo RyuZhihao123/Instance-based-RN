@@ -109,7 +109,9 @@ Codes:
 [[Pie charts]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/1position_angle_Pie)
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_angle.png"/></div>
+
 * Although the MSE of VGG and IRN_m seems similar, the MLAE are different a lot.
+
 | MSE(MLAE) | VGG | RN | IRN_m (!!!) |
 | ----- | -----  |  -----| ----- |
 | Bar chart | 0.00016(0.21)  | 0.00394(2.34)  | **0.00014(-0.31)** |
