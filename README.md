@@ -97,6 +97,8 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
+For the following experiments, I only show the MSE and MLAE on testing sets.
+
 ### Task2.1: Position-Angle.
 
 Codes: 
