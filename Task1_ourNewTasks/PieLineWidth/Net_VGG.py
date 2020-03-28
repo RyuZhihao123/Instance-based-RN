@@ -136,10 +136,14 @@ if __name__ == '__main__':
     history_iter = []
     batch_amount = train_num // m_batchSize
 
-    # information of the best model on validation set.
-    best_val_loss = 99999.99999
-    best_model_name = "xxxxx"
+    # best model according to the training loss. (Since this network can't deal with this generalization task)
     best_train_loss = 99999.99999
+    val_loss_using_Train = 99999.99999    # corresponding val loss using the best model on training set.
+    best_model_name_onTrain = "xxxxx"
+
+    # best model according to val loss.
+    best_val_loss = 99999.999999
+    best_model_name_onVal = "xxxxx"
 
     for iter in range(m_epoch):
 
@@ -174,23 +178,36 @@ if __name__ == '__main__':
         # since this network couldn't get good result on validation sets.
         if train_iter_loss < best_train_loss:
         #if val_iter_loss < best_val_loss:  # save the best model on Validation set.
-            RemoveDir(best_model_name)
-            best_model_name = dir_results + "model_vgg_{}.h5".format(val_iter_loss)
-            model.save_weights(best_model_name)
-            best_val_loss = val_iter_loss
+            RemoveDir(best_model_name_onTrain)
+            best_model_name_onTrain = dir_results + "model_vgg_onTrain_{}.h5".format(val_iter_loss)
+            model.save_weights(best_model_name_onTrain)
+            val_loss_using_Train = val_iter_loss
             best_train_loss = train_iter_loss
+
+        if val_iter_loss < best_val_loss:
+            best_val_loss = val_iter_loss
+            RemoveDir(best_model_name_onVal)
+            best_model_name_onVal = dir_results + "model_vgg_onVal_{}.h5".format(val_iter_loss)
+            model.save_weights(best_model_name_onVal)
 
 
     print("----------Training Done-------------------")
     # test on the testing set.
-    model.load_weights(best_model_name)   # using the best model.
+    model.load_weights(best_model_name_onTrain)   # using the best model.
 
-    test_loss = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
+    test_loss_usingTrain = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
 
     # Save the predicted results,and return the MALE
     MLAE_train = SavePredictedResult(x_train,y_train,'train')
-    MLAE_val = SavePredictedResult(x_val,y_val,'val')
-    MLAE_test = SavePredictedResult(x_test,y_test,'test')
+    MLAE_val = SavePredictedResult(x_val, y_val, 'val')
+    MLAE_test = SavePredictedResult(x_test, y_test, 'test')
+
+    model.load_weights(best_model_name_onVal)   # using the best model.
+    train_loss_onVal = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)
+    test_loss_onVal = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
+    MLAE_train_onVal = SavePredictedResult(x_train,y_train,'train')
+    MLAE_val_onVal = SavePredictedResult(x_val, y_val, 'val')
+    MLAE_test_onVal = SavePredictedResult(x_test, y_test, 'test')
 
 
     # save the training information.
@@ -204,19 +221,28 @@ if __name__ == '__main__':
         ws1.append(history_batch[i])
     for i in range(len(history_iter)):
         ws2.append(history_iter[i])
-    ws2.append(["Train loss", best_train_loss])
-    ws2.append(["Val loss", best_val_loss])
-    ws2.append(["Test loss", test_loss])
+    ws2.append(["Best Train loss", best_train_loss])
+    ws2.append(["Val loss usingTrain", val_loss_using_Train])
+    ws2.append(["Test loss usingTrain", test_loss_usingTrain])
     ws2.append(["Train MLAE", MLAE_train])
     ws2.append(["val MLAE", MLAE_val])
     ws2.append(["Test MLAE", MLAE_test])
+    ws2.append(["----------","----------"])
+    ws2.append(["Train loss usingVal", train_loss_onVal])
+    ws2.append(["Best Val loss", best_val_loss])
+    ws2.append(["Test loss usingVal", test_loss_onVal])
+    ws2.append(["Train MLAE using Val", MLAE_train_onVal])
+    ws2.append(["Val MLAE using Val", MLAE_val_onVal])
+    ws2.append(["Test MLAE using Val", MLAE_test_onVal])
 
     wb.save(dir_results + "train_info.xlsx")
 
     print("Training MSE:", best_train_loss)
-    print("Validat. MSE", best_val_loss)
-    print("Testing MSE:", test_loss)
+    print("Validat. MSE", val_loss_using_Train)
+    print("Testing MSE:", test_loss_usingTrain)
     print("Training MLAE:", MLAE_train)
     print("Validat. MLAE", MLAE_val)
     print("Testing MLAE:", MLAE_test)
+    print("Testing MSE using Val",test_loss_onVal)
+    print("Testing MLAE using Val:", MLAE_test_onVal)
 
