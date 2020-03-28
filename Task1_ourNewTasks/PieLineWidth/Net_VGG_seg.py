@@ -255,13 +255,19 @@ if __name__ == '__main__':
 
     wb.save(dir_results + "train_info.xlsx")
 
+    print("-----Using the best model on training loss-------")
     print("Training MSE:", best_train_loss)
     print("Validat. MSE", val_loss_using_Train)
     print("Testing MSE:", test_loss_usingTrain)
     print("Training MLAE:", MLAE_train)
     print("Validat. MLAE", MLAE_val)
     print("Testing MLAE:", MLAE_test)
-    print("Testing MSE using Val",test_loss_onVal)
-    print("Testing MLAE using Val:", MLAE_test_onVal)
+    print("-----Using the best model on Validation loss-------")
+    print("Training MSE:", train_loss_onVal)
+    print("Validat. MSE:", best_val_loss)
+    print("Testing MSE:", test_loss_onVal)
+    print("Training MLAE:", MLAE_train_onVal)
+    print("Validat. MLAE", MLAE_val_onVal)
+    print("Testing MLAE:", MLAE_test_onVal)
 
 
