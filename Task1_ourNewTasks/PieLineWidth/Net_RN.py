@@ -89,7 +89,7 @@ def SavePredictedResult(sess, x, y, flag = 'train'):
     print(y.shape)
     predict_Y = model.GetPredictions(sess,x,y,x.shape[0])
 
-    predictFile = open(dir_results+flag+"_predicted_results.txt",'w')
+    predictFile = open(dir_results+flag+"_pred_results.txt",'w')
     for i in range(predict_Y.shape[0]):
         for t in range(dim):  # save the ground truth
             predictFile.write(str(y[i,t]) + '\t')
@@ -194,16 +194,16 @@ if __name__ == '__main__':
     test_loss_usingTrain = model.GetTotalLoss(sess, x_test, y_test, x_test.shape[0])
 
     # Save the predicted results and ground truth.
-    MLAE_train = SavePredictedResult(sess, x_train, y_train, 'train')
-    MLAE_val = SavePredictedResult(sess, x_val, y_val, 'val')
-    MLAE_test = SavePredictedResult(sess, x_test, y_test, 'test')
+    MLAE_train = SavePredictedResult(sess, x_train, y_train, 'trainset_usingTrain')
+    MLAE_val = SavePredictedResult(sess, x_val, y_val, 'valset_usingTrain')
+    MLAE_test = SavePredictedResult(sess, x_test, y_test, 'testset_usingTrain')
 
     saver_val.restore(sess, best_model_name_onVal)
     train_loss_onVal = model.GetTotalLoss(sess, x_train, y_train, x_train.shape[0])
     test_loss_onVal = model.GetTotalLoss(sess, x_test, y_test, x_test.shape[0])
-    MLAE_train_onVal = SavePredictedResult(sess, x_train, y_train, 'train')
-    MLAE_val_onVal = SavePredictedResult(sess, x_val, y_val, 'val')
-    MLAE_test_onVal = SavePredictedResult(sess, x_test, y_test, 'test')
+    MLAE_train_onVal = SavePredictedResult(sess, x_train, y_train, 'trainset_usingVal')
+    MLAE_val_onVal = SavePredictedResult(sess, x_val, y_val, 'valset_usingVal')
+    MLAE_test_onVal = SavePredictedResult(sess, x_test, y_test, 'testset_usingVal')
 
     # save the training information.
     wb = Workbook()

@@ -101,7 +101,7 @@ def SavePredictedResult(x, y, flag = 'train'):
     dim = y.shape[1]
     print(y.shape)
     predict_Y = model.predict(x, batch_size=1)
-    predictFile = open(dir_results+flag+"_predicted_results.txt",'w')
+    predictFile = open(dir_results+flag+"_pred_results.txt",'w')
     for i in range(x.shape[0]):
         for t in range(dim):  # save the ground truth
             predictFile.write(str(y[i,t]) + '\t')
@@ -198,16 +198,16 @@ if __name__ == '__main__':
     test_loss_usingTrain = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
 
     # Save the predicted results,and return the MALE
-    MLAE_train = SavePredictedResult(x_train,y_train,'train')
-    MLAE_val = SavePredictedResult(x_val, y_val, 'val')
-    MLAE_test = SavePredictedResult(x_test, y_test, 'test')
+    MLAE_train = SavePredictedResult(x_train,y_train,'trainset_usingTrain')
+    MLAE_val = SavePredictedResult(x_val, y_val, 'valset_usingTrain')
+    MLAE_test = SavePredictedResult(x_test, y_test, 'testset_usingTrain')
 
     model.load_weights(best_model_name_onVal)   # using the best model.
     train_loss_onVal = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)
     test_loss_onVal = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
-    MLAE_train_onVal = SavePredictedResult(x_train,y_train,'train')
-    MLAE_val_onVal = SavePredictedResult(x_val, y_val, 'val')
-    MLAE_test_onVal = SavePredictedResult(x_test, y_test, 'test')
+    MLAE_train_onVal = SavePredictedResult(x_train,y_train,'trainset_usingVal')
+    MLAE_val_onVal = SavePredictedResult(x_val, y_val, 'valset_usingVal')
+    MLAE_test_onVal = SavePredictedResult(x_test, y_test, 'testset_usingVal')
 
 
     # save the training information.
