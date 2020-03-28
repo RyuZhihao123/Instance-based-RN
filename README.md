@@ -34,7 +34,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 To make the generalization ability of our network more powerful, we redesgin the IRN_m network, as shown in the following figure.
 
-<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/IRN_structure.png"/></div>
+<div align=center><img width="900" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/IRN_structure.png"/></div>
 
 **Details:**
 
