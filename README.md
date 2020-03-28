@@ -28,6 +28,8 @@ python3.6 Dataset_generator.py
 python3.6 Net_IRNm.py --gpu 2      # GPU ID
 ```
 
+<div align=center><src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles.png"/></div>
+
 **Details:**
 
 (1) Train/val/test sets contains 60000/20000/20000 charts respectively. And We use Adam optimizer (lr=0.0001) to train the network. 
