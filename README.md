@@ -22,7 +22,7 @@ Here, I'll take **Task1.1 PieNumber** [(codes)](https://github.com/RyuZhihao123/
 python3.6 Dataset_generator.py
 ```
 
-* **Second, run a network.** This command will train and test the `IRN_m` network. When training step is finished, the training informations(MLAE and MSE etc.), best model(on val sets) and the predicted results can be obtained in folder `./results/IRN_m`.
+* **Second, run a network.** This command will train and test the `IRN_m` network. When training step is finished, the training informations(MLAE, MSE and histories etc.), best model(on val sets) and the predicted results can be obtained in folder `./results/IRN_m`.
 
 ```
 python3.6 Net_IRNm.py --gpu 2      # GPU ID
@@ -30,17 +30,18 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 **Details:**
 
-(1) Train/val/test sets contains 60000/20000/20000 charts respectively. We use Adam optimizer (lr =0.0001). 
+(1) Train/val/test sets contains 60000/20000/20000 charts respectively. And We use Adam optimizer (lr=0.0001) to train the network. 
 
-(2) During training, we shuffle the datasets for each epoch, and save the `best model` which gets the lowest mse loss on `validation set`.
+(2) During training, we first shuffle the datasets before each epoch, and save the `best model` which can get the lowest MSE loss on `validation set`.
 
-(3) Noises were directly added during dataset generalization. And `Position-length` and `Point cloud` got the most different values from the obvious results when I use Adam optimizer.
+(3) Noises were directly added during dataset generation. And `Position-length` and `Point cloud` got the most different values from the obvious results in Daniel's paper when I use Adam optimizer.
 
 **Notice:** 
 
-In rare cases (very low probability), if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam could usually get a way low loss value even during the first epoch.
+In rare cases (quite low probability), if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam could usually get a way low loss value even during the first epoch.
 
 ## Experiments1: Our new tasks. 
+
 (These experiments focus on verifying the generalization ability of networks.)
 
 ### Task1.1: PieNumber.
