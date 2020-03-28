@@ -342,9 +342,9 @@ if __name__ == '__main__':
         ws1.append(history_batch[i])
     for i in range(len(history_iter)):
         ws2.append(history_iter[i])
-    ws2.append(["Best Train loss", best_train_loss])
-    ws2.append(["Best Val loss", best_val_loss])
-    ws2.append(['test_norm_loss',test_norm_loss])
+    ws2.append(["Train MSE", best_train_loss])
+    ws2.append(["Val MSE", best_val_loss])
+    ws2.append(['Test MSE',test_norm_loss])
     ws2.append(["Train MLAE", MLAE_train])
     ws2.append(["val MLAE", MLAE_val])
     ws2.append(["Test MLAE", MLAE_test])
