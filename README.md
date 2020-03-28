@@ -89,6 +89,8 @@ In rare cases (very low probability), if the loss of some network doesn't decrea
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png"/></div>
 
+* According to the following results, we found that even if the number of objects has increased, the performance of IRN_m is still very nice, wheareas VGG and RN seems bad than the condition that number is 3 to 6.
+
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
 | Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **Not finished, current:0.00021(-)** |
