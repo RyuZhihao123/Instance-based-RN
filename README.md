@@ -32,7 +32,7 @@ python3.6 Net_IRNm.py --gpu 2      # GPU ID
 
 ### 3. Our network structure:
 
-To make the generalization ability of our network more powerful, we redesgin the IRN_m network, as shown in the following figure.
+To make the generalization ability of our network more powerful, we redesgin the IRN_m network, as shown in the following figure. It make great improvements on the condition that the object number of training and testing set is different, for example, Task1.1 PieNumber.
 
 <div align=center><img width="900" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/IRN_structure.png"/></div>
 
