@@ -105,6 +105,10 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 | Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **0.00023(0.00)** |
 | Test set  | 0.00098(1.29)  | 0.00727(2.56) | 0.00041(0.25) | **0.00024(0.02)** |
 
+### Task1.4: PieColor
+
+* The colors are different between training and tesing set.
+
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
