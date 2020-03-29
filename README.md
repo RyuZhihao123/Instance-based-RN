@@ -64,7 +64,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png"/></div>
 
-* **We found only our IRN_m and IRN_p can get a good result on testing set. (1) Our network can deal with the condition that training and testing sets are different. (2) Our network seems converage faster than VGG and RN (Note that we cannot judge converagence by validition loss for this task, since the validition set is different from training set and it is not used for optimizing the network.).** 
+* **Only our IRN_m and IRN_p can get a good result on testing set. (1) Our network can deal with the condition that training and testing sets have different object number. (2) Our network seems converage faster than VGG and RN.** It seems that our the validation loss of IRN_m has a stronger fluctuation than VGG, but it's not true. Because the order of magnitudes (数量级) of their validation loss are too much different. 
 
 | MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| IRN_m (!!!) |
 | ----- | ----- | ----- | ----- | -----| ----- |
