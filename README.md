@@ -52,7 +52,7 @@ In rare cases (quite low probability), if the loss of some network doesn't decre
 
 (These experiments focus on verifying the generalization ability of networks.)
 
-Note that: **For most tasks, we use the best model on validation set to compute its final MSE and MLAE etc**. However, VGG, VGG_seg and RN don't have strong generalization abilibity so that they can not deal with the validation/testing sets in `PieNumber` and `PieLineWidth`. It may happen that the network has obtained the lowest loss on validation sets but it still doesn't converage on training set. **Only for VGG and RN in `PieNumber and PieLineWidth tasks`**, to evaluate them better, we use the best model on training set instead of on validation set to compute the MSE on training set, while we still use the best model on validation set to compute its MSE on testing sets.
+Note that: **For most tasks, we use the best model on validation set to compute its final MSE and MLAE etc**. However, VGG, VGG_seg and RN don't have strong generalization abilibity so that they can not deal with the validation/testing sets in `PieNumber` and `PieLineWidth`. It may happen that the network has obtained the lowest loss on validation sets but it still doesn't converage on training set. Therefor, to evaluate them better, **only for VGG and RN in PieNumber and PieLineWidth tasks**, we use the best model on training set instead of on validation set to compute the MSE on training set, while we still use the best model on validation set to compute its MSE on testing sets.
 
 ### Task1.1: PieNumber.
 
