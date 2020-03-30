@@ -114,10 +114,14 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 * The colors are different between training and tesing set.
 
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor.png"/></div>
+
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
 
 For the following experiments, I only show the MSE and MLAE on testing sets.
+
+钟发海在帮忙跑这些，跑完后再贴上（目前进度：按顺序到position-length的type3）。
 
 ### Task2.1: Position-Angle.
 
