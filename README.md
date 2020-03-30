@@ -83,7 +83,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 * Due to different line width, PieLineWidth is unlike PieNumber whose training and testing sets have same appearence domain. However, the result is surprising. **We found that both IRN_p and IRN_m can get a good result in testing set.**. That means if we segmeneted objects in advance and directly using CNN to extract their individual features, it does make some effect.
 
-* 在IRN_m的曲线中，val loss随着train loss是一起降低的，并且能持续相当一段时间，这证明分割是有帮助的。但是随着训练轮数增大到一定程度，此时网络在trainset上已经学的很好了，但是由于网络并没有见过val set中的图形，而网络又一直只在train set上进行学习，导致慢慢它开始不能适用于val set中的图像了。虽然这里我写作overfitting，但其实也不算是overfitting，因为毕竟两个数据集的appearence是完全独立的。
+* 在IRN_m的曲线中，val loss随着train loss是一起降低的，并且能持续相当一段时间，这证明分割是有帮助的。但是随着训练轮数增大到一定程度，此时网络在trainset上已经学的很好了，但是由于网络并没有见过val set中的图形，而网络又一直只在train set上进行学习，导致慢慢它开始不能适用于val set中的图像了。虽然这里我写作overfitting，但其实也不算是overfitting，因为毕竟两个数据集的appearence是完全独立的。这个现象是很正常的，因为随着训练越来越多，网络倾向于更加拟合它的训练集，但是在训练集达到0.00018时，也就是已经拟合training set的情况下，在测试集上我们也可以得到相当好的loss=0.00032。
 
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
