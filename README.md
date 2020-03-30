@@ -95,7 +95,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 [[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
 
-* This task is to test the performance when the maximun object number is large and the number changes greatly. The object number of both training and testing is 3 to 6 (12) for task Pie3_6(Pie3_12).  I think 12 is large enough since if we use a larger number, the chart would looks messy.
+* This task is to test the performance when the maximun object number is large and the number changes greatly. The object number in both training and testing sets is 3 to 6 (12) for task Pie3_6(Pie3_12).  I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png"/></div>
 
