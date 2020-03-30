@@ -81,13 +81,14 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png"/></div>
 
-
 * **PieLineWidth is unlike PieNumber whose training and testing sets both have different line width (The appearence domain are same). In PieLineWidth, due to different line width, the objects has different appearence between the training sets and testing set. However, the result is surprising!! We found that both IRN_p and IRN_m can get a good result in testing set, and IRN_m performs better. That means if we segmeneted objects in advance and directly using CNN to extract their individual features, it does make great effect.** 
 
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
 | Train set | 0.00036(0.69)  | 0.00429(2.26) | 0.00065(0.59) | **0.00018(0.01)** |
 | Test set | 0.06459(4.26)  | 0.05459(4.08) | 0.00160(1.27) | **0.00032(0.33)** |
+
+![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidthLoss.png)
 
 
 ### Task1.3: Pie3_12
