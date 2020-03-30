@@ -71,7 +71,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 | Train set | 0.00023(0.18) | 0.00022(0.11) | 0.00289(1.70) | 0.00015(-0.56) | **0.00010(-0.57)** |
 | Test set | 0.13354(4.56) | 0.14972(4.79) | 0.15874(4.84) | 0.00087(0.97) | **0.00058(0.81)** |
 
-<div align=center><img width="650" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumberLoss.png"/></div>
+![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumberLoss.png)
 
 ### Task1.2: PieLineWidth.
 
@@ -108,7 +108,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 | Pie3_12: Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **0.00023(0.00)** |
 | Pie3_12: Test set  | 0.00098(1.29)  | 0.00727(2.56) | 0.00041(0.25) | **0.00024(0.02)** |
 
-![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12Loss.png)
+<div align=center><img width="650" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12Loss.png"/></div>
 
 ### Task1.4: PieColor
 
