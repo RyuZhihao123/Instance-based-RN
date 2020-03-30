@@ -91,11 +91,11 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 ![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidthLoss.png)
 
 
-### Task1.3: Pie3_12
+### Task1.4: Pie3_6 and Pie3_12
 
 [[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
 
-* In both training and testing sets, each pie chart contains 3 to 12 pie sectors. This task is to test the performance when the maximun object number is large and the number changes greatly. I think 12 is large enough since if we use a larger number, the chart would looks messy.
+* This task is to test the performance when the maximun object number is large and the number changes greatly. The object number of both training and testing is 3 to 6 (12) for task Pie3_6(Pie3_12).  I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png"/></div>
 
@@ -103,8 +103,12 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
-| Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **0.00023(0.00)** |
-| Test set  | 0.00098(1.29)  | 0.00727(2.56) | 0.00041(0.25) | **0.00024(0.02)** |
+| Pie3_6: Train set | 0.00036(0.67)  | 0.00435(2.26) | 0.00016(-0.25) | **-(-)** |
+| Pie3_6: Test set  | 0.00038(0.70)  | 0.00438(2.26) | 0.00017(-0.22) | **-(-)** |
+| Pie3_12: Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **0.00023(0.00)** |
+| Pie3_12: Test set  | 0.00098(1.29)  | 0.00727(2.56) | 0.00041(0.25) | **0.00024(0.02)** |
+
+![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12Loss.png)
 
 ### Task1.4: PieColor
 
