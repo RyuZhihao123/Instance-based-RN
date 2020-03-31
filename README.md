@@ -92,6 +92,12 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 ![Pie LineWidth: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidthLoss.png)
 
+### Task1.3: PieColor
+
+* The colors are different between training and tesing set.
+
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor.png"/></div>
+
 
 ### Task1.4: Pie3_6 and Pie3_12
 
@@ -105,18 +111,13 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
-| Pie3_6: Train set | 0.00036(0.67)  | 0.00435(2.26) | 0.00016(-0.25) | **-(-)** |
-| Pie3_6: Test set  | 0.00038(0.70)  | 0.00438(2.26) | 0.00017(-0.22) | **-(-)** |
+| Pie3_6: Train set | 0.00036(0.67)  | 0.00435(2.26) | 0.00016(-0.25) | **0.00012(-0.29)** |
+| Pie3_6: Test set  | 0.00038(0.70)  | 0.00438(2.26) | 0.00017(-0.22) | **0.00012(-0.28)** |
 | Pie3_12: Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **0.00023(0.00)** |
 | Pie3_12: Test set  | 0.00098(1.29)  | 0.00727(2.56) | 0.00041(0.25) | **0.00024(0.02)** |
 
 <div align=center><img width="650" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12Loss.png"/></div>
 
-### Task1.4: PieColor
-
-* The colors are different between training and tesing set.
-
-<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor.png"/></div>
 
 ## Experiments2: ClevelandMcGill
 (The experiments that are same as Daniel's paper.)
