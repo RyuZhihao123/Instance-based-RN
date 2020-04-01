@@ -31,7 +31,7 @@ m_print_loss_step = 15      # print once after how many iterations.
 """ processing command line """
 parser = argparse.ArgumentParser()
 parser.add_argument("--lr", default=0.0001, type = float)  # learning rate
-parser.add_argument("--gpu", default='4')                  # gpu id
+parser.add_argument("--gpu", default='0')                  # gpu id
 parser.add_argument("--savedir", default= 'IRN_m')         # saving path.
 parser.add_argument("--backup", default=False, type=bool)   # whether to save weights after each epoch.
                                                            # (If True, it will cost lots of memories)
@@ -71,7 +71,7 @@ def LoadSeparateChartDataSet(flag = 'train'):  # must be 'train' or 'val' or 'te
         for barID in range(config.max_obj_num):
             imagePath = config.subChartName.format(imgID, barID)
 
-            if os.path.exists(imagePath):  # 如果文件存在
+            if os.path.exists(imagePath):
                 images[barID][imgID] = cv2.imread(imagePath) / 255.0
 
         if count % 10000 == 0:
@@ -151,18 +151,18 @@ def Build_IRN_m_Network(is_Using_Pretrained_Weights = False):
         input = Input(shape=(config.image_height, config.image_width, 3), name="input_{}".format(i))
         input_layers.append(input)
 
-    # The last input layer is used for representing R0=(a/a)=1.0 which is just a constant.
+    # The last input layer is used for representing R1=(o1/o1)=1.0 which is just a constant.
     # Here, I would use an extra input layer which is 1-dim and always equal to 1.0 rather than directly using a contant.
     # It makes same effect and can avoid some strange compile errors. (I only use TensorFlow before, not way familiar to Keras.)
-    R0_one_input = Input(shape=(1,),name="input_constant_scalar1",dtype='float32')   # always equal to 1.0.
-    input_layers.append(R0_one_input)
+    R1_one_input = Input(shape=(1,),name="input_constant_scalar1",dtype='float32')   # always equal to 1.0.
+    input_layers.append(R1_one_input)
 
     # Use a IRN_p module to predict pairwise ratios.
     IRN1 = IRN_p_Module()
     if is_Using_Pretrained_Weights:
         IRN1.load_weights("pretrained.h5")
 
-    ratio_p_layers = [R0_one_input]   # pairwise ratio vector. put in' R0=(a/a)=1.0 '.
+    ratio_p_layers = [R1_one_input]   # pairwise ratio vector. put in' R1=(o1/o1)=1.0 '.
     for i in range(config.max_obj_num-1): # compute the ratio of each neighbor pair.
         x = IRN1(inputs = [input_layers[i], input_layers[i+1]])
         ratio_p_layers.append(x)
@@ -170,10 +170,10 @@ def Build_IRN_m_Network(is_Using_Pretrained_Weights = False):
     print("ratio_p_layers", len(ratio_p_layers), ratio_p_layers[-1].shape)
 
     # Compute the ratios relative to the first object by using MULTIPLY() operation.
-    ratio_layers = [R0_one_input]  # put in R0=1.0.
+    ratio_layers = [R1_one_input]  # put in R1=1.0.
     i = 1
     while i<len(ratio_p_layers):
-        x = keras.layers.Multiply()(ratio_p_layers[:i+1])   # R0*R1*...Ri
+        x = keras.layers.Multiply()(ratio_p_layers[:i+1])   # R1*R2*...Ri
         i+=1
         ratio_layers.append(x)
 
@@ -240,6 +240,7 @@ if __name__ == '__main__':
     history_batch = []
     history_iter = []
     batch_amount = train_num // m_batchSize
+    rest_size = train_num - (batch_amount*m_batchSize)
 
     # information of the best model on validation set.
     best_val_loss = 99999.99999
@@ -265,6 +266,10 @@ if __name__ == '__main__':
                 print("iter({}/{}) Batch({}/{}) {} : mse_loss={}".format(iter, m_epoch, bid, batch_amount,
                                                                      GetProcessBar(bid, batch_amount), logs))
                 history_batch.append([iter, bid, logs])
+
+        # training on the rest data.
+        model.train_on_batch(x=[ x_train[i][index[-(rest_size+1) : -1]] for i in range(config.max_obj_num+1)],
+                             y=y_train[index[-(rest_size+1) : -1]])
 
         # one epoch is done. Do some information collections.
         epoch_loss_train = model.evaluate(x=x_train, y=y_train, verbose=0, batch_size=m_batchSize)

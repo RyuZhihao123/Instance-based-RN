@@ -56,7 +56,7 @@ def LoadChartDataset(flag = 'train'):
 
     images = []
     for i in range(__max_load_num):
-        fileName = __dirPath+config.subChartName.format(i,1)  # only take as input the second chart (after adding points).
+        fileName = __dirPath+config.chartName.format(i)
         images.append(cv2.imread(fileName))
 
     labels = []
@@ -79,7 +79,7 @@ def LoadChartDataset(flag = 'train'):
 
     print("---------------------------")
     print("[Process] x: ", images.shape)
-    print("[Process] y: ", labels.shape)
+    print("[Process] y: ", labels.shape, config.max_obj_num)
 
     return images, labels
 
@@ -91,7 +91,7 @@ def VGG():
     MLP.add(layers.Flatten(input_shape=feature_generator.output_shape[1:]))
     MLP.add(layers.Dense(256, activation='relu', input_dim=(100, 100, 1)))
     MLP.add(layers.Dropout(0.5))
-    MLP.add(layers.Dense(1, activation='linear'))  # REGRESSION
+    MLP.add(layers.Dense(config.max_obj_num, activation='linear'))  # REGRESSION
 
     model = keras.Model(inputs=feature_generator.input, outputs=MLP(feature_generator.output))
     return model
@@ -135,6 +135,7 @@ if __name__ == '__main__':
     history_batch = []
     history_iter = []
     batch_amount = train_num // m_batchSize
+    rest_size = train_num - (batch_amount*m_batchSize)
 
     # information of the best model on validation set.
     best_val_loss = 99999.99999
@@ -156,11 +157,14 @@ if __name__ == '__main__':
             model.train_on_batch(x_batch, y_batch)    # training on batch
 
             if bid % m_print_loss_step == 0:
-
                 logs = model.evaluate(x_batch, y_batch, verbose=0, batch_size=m_batchSize)
                 print("iter({}/{}) Batch({}/{}) {} : mse_loss={}".format(iter, m_epoch, bid, batch_amount,
                                                                      GetProcessBar(bid, batch_amount), logs))
                 history_batch.append([iter, bid, logs])
+
+        # training on the rest data.
+        model.train_on_batch(x_train[index[-(rest_size+1) : -1]],
+                             y_train[index[-(rest_size+1) : -1]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)

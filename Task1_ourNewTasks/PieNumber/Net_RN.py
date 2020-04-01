@@ -24,7 +24,7 @@ m_print_loss_step = 15      # print once after how many iterations.
 """ processing command line """
 parser = argparse.ArgumentParser()
 parser.add_argument("--lr", default=0.0001, type = float)  # learning rate
-parser.add_argument("--gpu", default='2')                  # gpu id
+parser.add_argument("--gpu", default='0')                  # gpu id
 parser.add_argument("--savedir", default= 'RN')         # saving path.
 parser.add_argument("--backup", default=False, type=bool)   # whether to save weights after each epoch.
                                                            # (If True, it will cost lots of memories)
@@ -131,6 +131,8 @@ if __name__ == '__main__':
     history_batch = []
     history_iter = []
     batch_amount = train_num//m_batchSize
+    rest_size = train_num - (batch_amount*m_batchSize)
+
 
     # best model according to the training loss. (Since this network can't deal with this generalization task)
     best_train_loss = 99999.99999
@@ -159,6 +161,11 @@ if __name__ == '__main__':
                 print("iter({}/{}) Batch({}/{}) {} : mse_loss={}".format(iter, m_epoch, bid, batch_amount,
                                                                               GetProcessBar(bid, batch_amount), loss))
                 history_batch.append([iter, bid, loss])
+
+        # training on the rest data.
+        model.Run_one_batch(sess,
+                            x_train[index[-(m_batchSize+1) : -1]],
+                            y_train[index[-(m_batchSize+1) : -1]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.GetTotalLoss(sess,x_train, y_train, x_train.shape[0])

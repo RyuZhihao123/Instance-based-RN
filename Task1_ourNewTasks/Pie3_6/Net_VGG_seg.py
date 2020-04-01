@@ -152,6 +152,7 @@ if __name__ == '__main__':
     history_batch = []
     history_iter = []
     batch_amount = train_num // m_batchSize
+    rest_size = train_num - (batch_amount*m_batchSize)
 
     # information of the best model on validation set.
     best_val_loss = 99999.99999
@@ -178,6 +179,10 @@ if __name__ == '__main__':
                                                                          GetProcessBar(bid, batch_amount),
                                                                          logs))
                 history_batch.append([iter, bid, logs])
+
+        # training on the rest data.
+        model.train_on_batch(x_train[index[-(rest_size+1) : -1]],
+                             y_train[index[-(rest_size+1) : -1]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)

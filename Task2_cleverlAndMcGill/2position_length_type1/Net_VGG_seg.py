@@ -57,11 +57,11 @@ def LoadSeparateChartDataSet(flag = 'train'):
 
     __max_load_num, __dirSubPath, __path_groundTruth = GetInformation(flag)
 
-    images = np.ones((__max_load_num, 2 , Config.image_height, config.image_width), dtype='float32')
+    images = np.ones((__max_load_num, config.max_obj_num , Config.image_height, config.image_width), dtype='float32')
     count = 0
     os.chdir(__dirSubPath)
     for imgID in range(__max_load_num):
-        for barID in range(2):
+        for barID in range(config.max_obj_num):
             imagePath = config.subChartName.format(imgID, barID)
 
             if os.path.exists(imagePath):  # if file exists.
@@ -89,7 +89,7 @@ def LoadSeparateChartDataSet(flag = 'train'):
 
     print("---------------------------")
     print("[Process] x: ", images.shape)
-    print("[Process] y: ", labels.shape, 2)
+    print("[Process] y: ", labels.shape, config.max_obj_num)
 
     return images, labels
 
@@ -98,13 +98,13 @@ def LoadSeparateChartDataSet(flag = 'train'):
 
 # VGG that is same as Daniel's code.
 def VGG():
-    feature_generator = keras.applications.VGG19(weights=None, include_top=False, input_shape=(100, 100, 2))
+    feature_generator = keras.applications.VGG19(weights=None, include_top=False, input_shape=(100, 100, config.max_obj_num))
 
     MLP = models.Sequential()
     MLP.add(layers.Flatten(input_shape=feature_generator.output_shape[1:]))
-    MLP.add(layers.Dense(256, activation='relu', input_dim=(100, 100, 2)))
+    MLP.add(layers.Dense(256, activation='relu', input_dim=(100, 100, config.max_obj_num)))
     MLP.add(layers.Dropout(0.5))
-    MLP.add(layers.Dense(1, activation='linear'))  # REGRESSION
+    MLP.add(layers.Dense(config.max_obj_num, activation='linear'))  # REGRESSION
 
     model = keras.Model(inputs=feature_generator.input, outputs=MLP(feature_generator.output))
     return model
@@ -152,6 +152,7 @@ if __name__ == '__main__':
     history_batch = []
     history_iter = []
     batch_amount = train_num // m_batchSize
+    rest_size = train_num - (batch_amount*m_batchSize)
 
     # information of the best model on validation set.
     best_val_loss = 99999.99999
@@ -178,6 +179,10 @@ if __name__ == '__main__':
                                                                          GetProcessBar(bid, batch_amount),
                                                                          logs))
                 history_batch.append([iter, bid, logs])
+
+        # training on the rest data.
+        model.train_on_batch(x_train[index[-(rest_size+1) : -1]],
+                             y_train[index[-(rest_size+1) : -1]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)

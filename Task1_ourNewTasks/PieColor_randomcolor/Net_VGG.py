@@ -135,6 +135,7 @@ if __name__ == '__main__':
     history_batch = []
     history_iter = []
     batch_amount = train_num // m_batchSize
+    rest_size = train_num - (batch_amount*m_batchSize)
 
     # best model according to the training loss. (Since this network can't deal with this generalization task)
     best_train_loss = 99999.99999
@@ -164,6 +165,10 @@ if __name__ == '__main__':
                 print("iter({}/{}) Batch({}/{}) {} : mse_loss={}".format(iter, m_epoch, bid, batch_amount,
                                                                      GetProcessBar(bid, batch_amount), logs))
                 history_batch.append([iter, bid, logs])
+
+        # training on the rest data.
+        model.train_on_batch(x_train[index[-(rest_size+1) : -1]],
+                             y_train[index[-(rest_size+1) : -1]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)
@@ -237,14 +242,15 @@ if __name__ == '__main__':
 
     wb.save(dir_results + "train_info.xlsx")
 
-    print("-----Using the best model on training loss-------")
+    print("-----Using the best model according to training loss-------")
     print("Training MSE:", best_train_loss)
     print("Validat. MSE", val_loss_using_Train)
     print("Testing MSE:", test_loss_usingTrain)
     print("Training MLAE:", MLAE_train)
     print("Validat. MLAE", MLAE_val)
     print("Testing MLAE:", MLAE_test)
-    print("-----Using the best model on Validation loss-------")
+
+    print("-----Using the best model according to Validation loss-------")
     print("Training MSE:", train_loss_onVal)
     print("Validat. MSE:", best_val_loss)
     print("Testing MSE:", test_loss_onVal)
