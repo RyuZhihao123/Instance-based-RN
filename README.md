@@ -90,9 +90,9 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 ### Task1.3: PieColor
 
-* The colors are different between training and tesing set.
+* We design two tasks in PieColor. (1) **FixedTrain**: the training set only uses 6 colors, while testing set use random colors. (2) **RandomColor**: Both training and testing set use random colors.
 
-<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor.png"/></div>
+![](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor.png)
 
 | FixedTrain | VGG | RN | IRN_m (!!!) |
 | ----- | -----  | ----- | ----- |
