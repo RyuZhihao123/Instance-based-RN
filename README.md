@@ -25,7 +25,7 @@ python3.6 Dataset_generator.py
 * **Second, run a network.** This command will train and test the `IRN_m` network. When training step is finished, the training informations(MLAE, MSE and histories etc.), best model(on val sets) and the predicted results can be obtained in folder `./results/IRN_m`.
 
 ```
-python3.6 Net_IRNm.py --gpu 2      # GPU ID
+python3.6 Net_IRNm.py --gpu 2 (--savedir irnm_2)      # GPU ID ( target directory: ./results/irnm_2)
 ```
 
 <div align=center><img width="650" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles.png"/></div>
