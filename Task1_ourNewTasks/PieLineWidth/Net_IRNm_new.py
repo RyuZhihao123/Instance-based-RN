@@ -240,8 +240,8 @@ if __name__ == '__main__':
     model = Build_IRN_m_Network()
     model.compile(loss='mse', optimizer=m_optimizer)
 
-    from keras.utils import plot_model
-    plot_model(model, to_file='C:/Users/liuzh/Desktop/model.png', show_shapes=True)
+    # from keras.utils import plot_model
+    # plot_model(model, to_file='C:/Users/liuzh/Desktop/model.png', show_shapes=True)
 
     print("----------Training-------------------")
     history_batch = []
