@@ -90,6 +90,8 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 ### Task1.3: PieColor
 
+[[FixedTrain Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieColor_fixedtrain)  [[RandomColor Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieColor_randomcolor) 
+
 * We design two tasks in PieColor. (1) **FixedTrain**: the training set only uses 6 colors, while testing set use random colors. (2) **RandomColor**: Both training and testing set use random colors.
 
 ![](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor.png)
