@@ -116,7 +116,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 * This task is to test the performance when the maximun object number is large and the number changes greatly. The object number in both training and testing sets is 3 to 6 (12) for task Pie3_6(Pie3_12).  I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
-<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_12.png"/></div>
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12.png"/></div>
 
 * **It's clear that VGG and RN performs worse when the number of objects increased, as the following results proved. Whereas, our network, IRN_m can still perform very nice**. `It seems that the MLAE of VGG increases more significantly than MSE.`
 
