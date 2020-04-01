@@ -2,9 +2,9 @@
 
 We designed the **IRN_m network** for those multi-objects ratio tasks, and **IRN_p network** for pair-ratio estimation tasks. 
 
-Since I didn't tidy up my codes before, if you meet any bug, please tell me (liuzh96@outlook.com)  thanks (^,^).
+if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,^).
 
-## How to use.
+## Usage.
 
 ### 1. Environments:
 
@@ -94,6 +94,15 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor.png"/></div>
 
+| FixedTrain | VGG | RN | IRN_m (!!!) |
+| ----- | -----  | ----- | ----- |
+| Train set | 0.00040(0.76)  | 0.00443(2.28)  | **0.00014(-0.24)** |
+| Test set | 0.06982(3.90)  | 0.08715(4.38)  | **0.00480(1.45)** |
+
+| RandomColor | VGG | RN |  IRN_m (!!!) |
+| ----- | -----  | ----- | ----- |
+| Train set | 0.00051(0.86)  | 0.00492(2.36)| **0.00015(-0.22)** |
+| Test set | 0.00095(0.95)  | 0.00599(2.41)  | **0.00015(-0.21)** |
 
 ### Task1.4: Pie3_6 and Pie3_12
 
