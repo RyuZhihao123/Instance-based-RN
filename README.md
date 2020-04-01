@@ -44,10 +44,6 @@ To make the generalization ability of our network more powerful, we redesgin the
 
 (3) Noises were directly added during dataset generation. And `Position-length` and `Point cloud` got the most different values from the obvious results in Daniel's paper when I use Adam optimizer.
 
-**Notice:** 
-
-In rare cases (quite low probability), if the loss of some network doesn't decrease obviously after the first epoch, please kill it and restart the program, because Adam could usually get a way low loss value even during the first epoch.
-
 ## Experiments1: Our new tasks. 
 
 (These experiments focus on verifying the generalization ability of networks.)
