@@ -104,6 +104,10 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 | Train set | 0.00051(0.86)  | 0.00492(2.36)| **0.00015(-0.22)** |
 | Test set | 0.00095(0.95)  | 0.00599(2.41)  | **0.00015(-0.21)** |
 
+![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor_fixedTrain.png)
+
+![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor_random.png)
+
 ### Task1.4: Pie3_6 and Pie3_12
 
 [[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
