@@ -135,7 +135,6 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 For the following experiments, I only show the MSE and MLAE on testing sets.
 
-钟发海在帮忙跑这些，跑完后再贴上（目前进度：按顺序到position-length的type3）。
 
 ### Task2.1: Position-Angle.
 
@@ -145,12 +144,10 @@ Codes:
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_angle.png"/></div>
 
-* Although the MSE of VGG and IRN_m seems similar, the MLAE are different a lot.
-
-| MSE(MLAE) | VGG | RN | IRN_m (!!!) |
+| MSE(MLAE) | VGG | RN | IRN_p (!!!) |
 | ----- | -----  |  -----| ----- |
 | Bar chart | 0.00016(0.21)  | 0.00394(2.34)  | **0.00014(-0.31)** |
-| Pie chart | -(-)  | -(-)  | **-(-)** |
+| Pie chart | 0.00028(0.57)  | 0.00390(2.34)  | **0.00021(0.11)** |
 
 ### Task2.2: Position-Length.
 
@@ -164,12 +161,22 @@ Codes:
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_multi.png"/></div>
 
+
+| MSE(MLAE) | VGG | RN | IRN_p (!!!) |
+| ----- | -----  |  -----| ----- |
+| Type1 | **0.000004(-1.77)**  | 0.000546(0.80)  | 0.000008(-1.49) |
+| Type2 | **0.000005(-1.66)**  | 0.000485(0.72)  | 0.000007(-1.57) |
+| Type3 | **0.000006(-1.63)**  | 0.000524(0.78)  | 0.000007(-1.54) |
+| Type4 | **0.000004(-1.80)**  | 0.000494(0.74)  | 0.000010(-1.34) |
+| Type5 | **0.000004(-1.77)**  | 0.000509(0.77)  | 0.000009(-1.42) |
+| Multi | 0.000011(-1.41)  | 0.000507(0.76)  | **0.000008(-1.49)** |
+
 ### Task2.3: Point-Cloud.
 
 Codes: 
 [[Num10]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_10) 
 [[Num100]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_100)
-[[Num1000]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/4point_cloud_1000)
+[[Num1000]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_1000)
 
 
 ## Experiments3: Supplement 
