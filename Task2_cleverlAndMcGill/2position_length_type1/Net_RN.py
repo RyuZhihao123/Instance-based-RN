@@ -24,7 +24,7 @@ m_print_loss_step = 15      # print once after how many iterations.
 """ processing command line """
 parser = argparse.ArgumentParser()
 parser.add_argument("--lr", default=0.0001, type = float)  # learning rate
-parser.add_argument("--gpu", default='2')                  # gpu id
+parser.add_argument("--gpu", default='0')                  # gpu id
 parser.add_argument("--savedir", default= 'RN')         # saving path.
 parser.add_argument("--backup", default=False, type=bool)   # whether to save weights after each epoch.
                                                            # (If True, it will cost lots of memories)
@@ -79,7 +79,7 @@ def LoadChartDataset(flag = 'train'):
 
     print("---------------------------")
     print("[Process] x: ", images.shape)
-    print("[Process] y: ", labels.shape, config.max_obj_num)
+    print("[Process] y: ", labels.shape)
 
     return images, labels
 
@@ -93,7 +93,6 @@ def SavePredictedResult(sess, x, y, flag = 'train'):
     for i in range(predict_Y.shape[0]):
         for t in range(dim):  # save the ground truth
             predictFile.write(str(y[i,t]) + '\t')
-        predictFile.write('\n')
         for t in range(dim):  # save the predicted results
             predictFile.write(str(predict_Y[i, t]) + '\t')
         predictFile.write('\n')
@@ -116,7 +115,7 @@ if __name__ == '__main__':
     x_test -= .5
 
     print("----------Build network----------------")
-    model = ModelRN(learning_rate=a.lr, batch_size=m_batchSize, c_dim=3, a_dim=config.max_obj_num)
+    model = ModelRN(learning_rate=a.lr, batch_size=m_batchSize, c_dim=3, a_dim=1)
 
     # TensorFlow environment.
     init = tf.global_variables_initializer()
@@ -156,10 +155,6 @@ if __name__ == '__main__':
                                                                               GetProcessBar(bid, batch_amount), loss))
                 history_batch.append([iter, bid, loss])
 
-        # training on the rest data.
-        model.Run_one_batch(sess,
-                            x_train[index[-(m_batchSize+1) : -1]],
-                            y_train[index[-(m_batchSize+1) : -1]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.GetTotalLoss(sess,x_train, y_train, x_train.shape[0])
@@ -168,11 +163,8 @@ if __name__ == '__main__':
                                                                              val_iter_loss))
         history_iter.append([iter, train_iter_loss, val_iter_loss])
 
-        # if a.backup == True:   # whether to save the weight after each epoch
-        #     saver.save(sess, dir_results + "/backup/model_{}_{}.ckpt".format(iter,val_iter_loss))
-
         if val_iter_loss < best_val_loss:  # save the best model on Validation set.
-            best_model_name = dir_results + "model_RN_{}.ckpt".format(val_iter_loss)
+            best_model_name = dir_results + "model_RN_onVal_{}.ckpt".format(val_iter_loss)
             saver.save(sess, best_model_name)
             best_val_loss = val_iter_loss
             best_train_loss = train_iter_loss
@@ -191,21 +183,23 @@ if __name__ == '__main__':
 
     # save the training information.
     wb = Workbook()
-    ws1 = wb.active
-    ws2 = wb.create_sheet("iter loss")
+    ws1 = wb.active                         # MSE/MLAE
+    ws1.title = "MLAE_MSE"
+    ws2 = wb.create_sheet("EPOCH loss")      # iteration loss
+    ws3 = wb.create_sheet("BATCH loss")     # batch loss
 
-    ws1.append(["Iter ID", "Batch ID", "MSE Loss"])
-    ws2.append(["Iter ID", "Train MSE Loss", "Val MSE Loss"])
-    for i in range(len(history_batch)):
-        ws1.append(history_batch[i])
+    ws2.append(["Epoch ID", "Train MSE Loss", "Val MSE Loss"])
+    ws3.append(["Epoch ID", "Batch ID", "MSE Loss"])
     for i in range(len(history_iter)):
         ws2.append(history_iter[i])
-    ws2.append(["Train loss", best_train_loss])
-    ws2.append(["Val loss", best_val_loss])
-    ws2.append(["Test loss", test_loss])
-    ws2.append(["Train MLAE", MLAE_train])
-    ws2.append(["val MLAE", MLAE_val])
-    ws2.append(["Test MLAE", MLAE_test])
+    for i in range(len(history_batch)):
+        ws3.append(history_batch[i])
+    ws1.append(["Train loss", best_train_loss])
+    ws1.append(["Val loss", best_val_loss])
+    ws1.append(["Test loss", test_loss])
+    ws1.append(["Train MLAE", MLAE_train])
+    ws1.append(["val MLAE", MLAE_val])
+    ws1.append(["Test MLAE", MLAE_test])
 
     wb.save(dir_results + "train_info.xlsx")
 

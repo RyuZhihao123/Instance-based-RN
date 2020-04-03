@@ -4,7 +4,8 @@ import cv2
 class Figure4:
 
     @staticmethod
-    def AddNoise(image,noises):
+    def AddNoise(image):
+        noises = np.random.uniform(0, 0.05, (100, 100))
         image = image + noises
         _min = image.min()
         _max = image.max()
@@ -79,11 +80,10 @@ class Figure4:
                 cv2.rectangle(barchart2,(left_bar,99),(right_bar,99 - int(d)),0,1)
                 barchart2[94:95, int(left_bar + b_width / 2):int(left_bar + b_width / 2) + 1] = 0
 
-        noises = np.random.uniform(0, 0.05, (100, 100))
 
-        barchart = Figure4.AddNoise(barchart,noises)
-        barchart1 = Figure4.AddNoise(barchart1,noises)
-        barchart2 = Figure4.AddNoise(barchart2,noises)
+        barchart = Figure4.AddNoise(barchart)
+        barchart1 = Figure4.AddNoise(barchart1)
+        barchart2 = Figure4.AddNoise(barchart2)
 
         return barchart,barchart1,barchart2
 
@@ -131,11 +131,10 @@ class Figure4:
                 cv2.rectangle(barchart2,(left_bar,99),(right_bar,99 - int(d)),0,1)
                 barchart2[94:95, int(left_bar + b_width / 2):int(left_bar + b_width / 2) + 1] = 0
 
-        noises = np.random.uniform(0, 0.05, (100, 100))
 
-        barchart = Figure4.AddNoise(barchart,noises)
-        barchart1 = Figure4.AddNoise(barchart1,noises)
-        barchart2 = Figure4.AddNoise(barchart2,noises)
+        barchart = Figure4.AddNoise(barchart)
+        barchart1 = Figure4.AddNoise(barchart1)
+        barchart2 = Figure4.AddNoise(barchart2)
 
         return barchart,barchart1,barchart2
 
@@ -192,11 +191,11 @@ class Figure4:
             if i == 0:
                 barchart[int(99 - int(d) / 2):int(99 - int(d) / 2 + 1), 75:76] = 0
                 barchart2[int(99 - int(d) / 2):int(99 - int(d) / 2 + 1), 75:76] = 0
-        noises = np.random.uniform(0, 0.05, (100, 100))
 
-        barchart = Figure4.AddNoise(barchart,noises)
-        barchart1 = Figure4.AddNoise(barchart1,noises)
-        barchart2 = Figure4.AddNoise(barchart2,noises)
+
+        barchart = Figure4.AddNoise(barchart)
+        barchart1 = Figure4.AddNoise(barchart1)
+        barchart2 = Figure4.AddNoise(barchart2)
         return barchart,barchart1,barchart2
 
     @staticmethod
@@ -267,11 +266,10 @@ class Figure4:
                 barchart[int(99 - current + (int(d) / 2)):int(99 - current + (int(d) / 2) + 1), 75:76] = 0
                 barchart2[int(99 - current + (int(d) / 2)):int(99 - current + (int(d) / 2) + 1), 75:76] = 0
 
-        noises = np.random.uniform(0, 0.05, (100, 100))
 
-        barchart = Figure4.AddNoise(barchart,noises)
-        barchart1 = Figure4.AddNoise(barchart1,noises)
-        barchart2 = Figure4.AddNoise(barchart2,noises)
+        barchart = Figure4.AddNoise(barchart)
+        barchart1 = Figure4.AddNoise(barchart1)
+        barchart2 = Figure4.AddNoise(barchart2)
         return barchart,barchart1,barchart2
 
     @staticmethod
@@ -327,11 +325,11 @@ class Figure4:
         for i, d in enumerate(all_values[5:]):
             cv2.line(barchart, (60, 99 - (int(d) + current)), (90, 99 - (int(d) + current)), 0)
             current += int(d)
-        noises = np.random.uniform(0, 0.05, (100, 100))
 
-        barchart = Figure4.AddNoise(barchart,noises)
-        barchart1 = Figure4.AddNoise(barchart1,noises)
-        barchart2 = Figure4.AddNoise(barchart2,noises)
+
+        barchart = Figure4.AddNoise(barchart)
+        barchart1 = Figure4.AddNoise(barchart1)
+        barchart2 = Figure4.AddNoise(barchart2)
         return barchart,barchart1,barchart2
 
     @staticmethod

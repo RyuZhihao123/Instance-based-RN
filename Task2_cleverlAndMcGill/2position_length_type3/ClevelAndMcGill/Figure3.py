@@ -92,6 +92,7 @@ class Figure3:
         noises = np.random.uniform(0, 0.05, (100, 100))
         barchart = Figure3.AddNoise(barchart,noises)
         for i in range(len(subcharts)):
+            noises = np.random.uniform(0, 0.05, (100, 100))
             subcharts[i] = Figure3.AddNoise(subcharts[i],noises)
 
         return barchart, subcharts
@@ -149,6 +150,7 @@ class Figure3:
         noises = np.random.uniform(0, 0.05, (100, 100))
         piechart = Figure3.AddNoise(piechart,noises)
         for i in range(len(subcharts)):
+            noises = np.random.uniform(0, 0.05, (100, 100))
             subcharts[i] = Figure3.AddNoise(subcharts[i],noises)
 
         return piechart,subcharts

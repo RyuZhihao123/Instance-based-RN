@@ -69,8 +69,8 @@ if __name__ == '__main__':
             except:
                 continue
             i = _count
-            if i % 200 == 0:
-                print(" 已经生成{}张图像".format(i))
+            if i % 1000 == 0:
+                print(" Num={}/{}".format(i,image_num))
 
             cv2.imwrite(dir_charts + config.chartName.format(i), i0 * 255)
 

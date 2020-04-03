@@ -76,14 +76,11 @@ if __name__ == '__main__':
             for t in range(len(subImages)):
                 cv2.imwrite(dir_subCharts + config.subChartName.format(i, t), subImages[t] * 255)
 
+            for t in range(len(featureVector)):
                 file_gt.write("%.6f\t" % (featureVector[t]))
-
-            for t in range(config.max_obj_num - len(featureVector)):
-                file_gt.write("0.00\t")
             file_gt.write("\n")
 
-            for t in range(len(subImages) - 1):
-                # cv2.imwrite(config.dir_subCharts + "sub_{}_{}.png".format(i,t), subImages[t]*255)
+            for t in range(len(featureVector) - 1):
                 file_pair_gt.write("{} {} {}\n".format(config.subChartName.format(i, t),
                                                        config.subChartName.format(i, t + 1),
                                                        featureVector[t+1] / featureVector[t]))

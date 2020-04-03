@@ -79,7 +79,7 @@ def LoadChartDataset(flag = 'train'):
 
     print("---------------------------")
     print("[Process] x: ", images.shape)
-    print("[Process] y: ", labels.shape, config.max_obj_num)
+    print("[Process] y: ", labels.shape)
 
     return images, labels
 
@@ -89,9 +89,9 @@ def VGG():
 
     MLP = models.Sequential()
     MLP.add(layers.Flatten(input_shape=feature_generator.output_shape[1:]))
-    MLP.add(layers.Dense(256, activation='relu', input_dim=(100, 100, 1)))
+    MLP.add(layers.Dense(256, activation='relu', input_dim=(100, 100, 3)))
     MLP.add(layers.Dropout(0.5))
-    MLP.add(layers.Dense(config.max_obj_num, activation='linear'))  # REGRESSION
+    MLP.add(layers.Dense(1, activation='linear'))  # REGRESSION
 
     model = keras.Model(inputs=feature_generator.input, outputs=MLP(feature_generator.output))
     return model
@@ -105,7 +105,6 @@ def SavePredictedResult(x, y, flag = 'train'):
     for i in range(x.shape[0]):
         for t in range(dim):  # save the ground truth
             predictFile.write(str(y[i,t]) + '\t')
-        predictFile.write('\n')
         for t in range(dim):  # save the predicted results
             predictFile.write(str(predict_Y[i, t]) + '\t')
         predictFile.write('\n')
@@ -163,8 +162,9 @@ if __name__ == '__main__':
                 history_batch.append([iter, bid, logs])
 
         # training on the rest data.
-        model.train_on_batch(x_train[index[-(rest_size+1) : -1]],
-                             y_train[index[-(rest_size+1) : -1]])
+        if rest_size > 0:
+            model.train_on_batch(x_train[index[batch_amount*m_batchSize : ]],
+                                y_train[index[batch_amount*m_batchSize : ]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)
@@ -177,7 +177,7 @@ if __name__ == '__main__':
 
         if val_iter_loss < best_val_loss:  # save the best model on Validation set.
             RemoveDir(best_model_name)
-            best_model_name = dir_results + "model_vgg_{}.h5".format(val_iter_loss)
+            best_model_name = dir_results + "model_vgg_onVal_{}.h5".format(val_iter_loss)
             model.save_weights(best_model_name)
             best_val_loss = val_iter_loss
             best_train_loss = train_iter_loss
@@ -197,21 +197,23 @@ if __name__ == '__main__':
 
     # save the training information.
     wb = Workbook()
-    ws1 = wb.active
-    ws2 = wb.create_sheet("iter loss")
+    ws1 = wb.active                         # MSE/MLAE
+    ws1.title = "MLAE_MSE"
+    ws2 = wb.create_sheet("EPOCH loss")      # iteration loss
+    ws3 = wb.create_sheet("BATCH loss")     # batch loss
 
-    ws1.append(["Iter ID", "Batch ID", "MSE Loss"])
-    ws2.append(["Iter ID", "Train MSE Loss", "Val MSE Loss"])
-    for i in range(len(history_batch)):
-        ws1.append(history_batch[i])
+    ws2.append(["Epoch ID", "Train MSE Loss", "Val MSE Loss"])
+    ws3.append(["Epoch ID", "Batch ID", "MSE Loss"])
     for i in range(len(history_iter)):
         ws2.append(history_iter[i])
-    ws2.append(["Train loss", best_train_loss])
-    ws2.append(["Val loss", best_val_loss])
-    ws2.append(["Test loss", test_loss])
-    ws2.append(["Train MLAE", MLAE_train])
-    ws2.append(["val MLAE", MLAE_val])
-    ws2.append(["Test MLAE", MLAE_test])
+    for i in range(len(history_batch)):
+        ws3.append(history_batch[i])
+    ws1.append(["Train loss", best_train_loss])
+    ws1.append(["Val loss", best_val_loss])
+    ws1.append(["Test loss", test_loss])
+    ws1.append(["Train MLAE", MLAE_train])
+    ws1.append(["val MLAE", MLAE_val])
+    ws1.append(["Test MLAE", MLAE_test])
 
     wb.save(dir_results + "train_info.xlsx")
 

@@ -162,10 +162,6 @@ if __name__ == '__main__':
                                                                               GetProcessBar(bid, batch_amount), loss))
                 history_batch.append([iter, bid, loss])
 
-        # training on the rest data.
-        model.Run_one_batch(sess,
-                            x_train[index[-(m_batchSize+1) : -1]],
-                            y_train[index[-(m_batchSize+1) : -1]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.GetTotalLoss(sess,x_train, y_train, x_train.shape[0])
@@ -177,10 +173,9 @@ if __name__ == '__main__':
         # if a.backup == True:   # whether to save the weight after each epoch
         #     saver.save(sess, dir_results + "/backup/model_{}_{}.ckpt".format(iter,val_iter_loss))
 
-        # For generalization task, we save the best model on training set instead of on validation set.
+        # For generalization task, we save both the best models on training set and on validation set.
         # since this network couldn't get good result on validation sets.
         if train_iter_loss < best_train_loss:
-        #if val_iter_loss < best_val_loss:  # save the best model on Validation set.
             RemoveDir(best_model_name_onTrain)
             best_model_name_onTrain = dir_results + "model_RN_onTrain_{}.ckpt".format(val_iter_loss)
             saver.save(sess, best_model_name_onTrain)
@@ -214,28 +209,32 @@ if __name__ == '__main__':
 
     # save the training information.
     wb = Workbook()
-    ws1 = wb.active
-    ws2 = wb.create_sheet("iter loss")
+    ws1 = wb.active  # MSE/MLAE
+    ws1.title = "MLAE_MSE"
+    ws2 = wb.create_sheet("EPOCH loss")  # iteration loss
+    ws3 = wb.create_sheet("BATCH loss")  # batch loss
 
-    ws1.append(["Iter ID", "Batch ID", "MSE Loss"])
-    ws2.append(["Iter ID", "Train MSE Loss", "Val MSE Loss"])
-    for i in range(len(history_batch)):
-        ws1.append(history_batch[i])
+    ws2.append(["Epoch ID", "Train MSE Loss", "Val MSE Loss"])
+    ws3.append(["Epoch ID", "Batch ID", "MSE Loss"])
+
     for i in range(len(history_iter)):
         ws2.append(history_iter[i])
-    ws2.append(["Best Train loss", best_train_loss])
-    ws2.append(["Val loss usingTrain", val_loss_using_Train])
-    ws2.append(["Test loss usingTrain", test_loss_usingTrain])
-    ws2.append(["Train MLAE", MLAE_train])
-    ws2.append(["val MLAE", MLAE_val])
-    ws2.append(["Test MLAE", MLAE_test])
-    ws2.append(["----------", "----------"])
-    ws2.append(["Train loss usingVal", train_loss_onVal])
-    ws2.append(["Best Val loss", best_val_loss])
-    ws2.append(["Test loss usingVal", test_loss_onVal])
-    ws2.append(["Train MLAE using Val", MLAE_train_onVal])
-    ws2.append(["Val MLAE using Val", MLAE_val_onVal])
-    ws2.append(["Test MLAE using Val", MLAE_test_onVal])
+    for i in range(len(history_batch)):
+        ws3.append(history_batch[i])
+    ws1.append(["----------", "Using best model on train_set"])
+    ws1.append(["Best Train loss", best_train_loss])
+    ws1.append(["Val loss usingTrain", val_loss_using_Train])
+    ws1.append(["Test loss usingTrain", test_loss_usingTrain])
+    ws1.append(["Train MLAE", MLAE_train])
+    ws1.append(["val MLAE", MLAE_val])
+    ws1.append(["Test MLAE", MLAE_test])
+    ws1.append(["----------", "Using best model on val_set"])
+    ws1.append(["Train loss usingVal", train_loss_onVal])
+    ws1.append(["Best Val loss", best_val_loss])
+    ws1.append(["Test loss usingVal", test_loss_onVal])
+    ws1.append(["Train MLAE using Val", MLAE_train_onVal])
+    ws1.append(["Val MLAE using Val", MLAE_val_onVal])
+    ws1.append(["Test MLAE using Val", MLAE_test_onVal])
 
     wb.save(dir_results + "train_info.xlsx")
 

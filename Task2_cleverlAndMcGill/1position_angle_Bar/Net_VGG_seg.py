@@ -28,7 +28,7 @@ m_print_loss_step = 15      # print once after how many iterations.
 """ processing command line """
 parser = argparse.ArgumentParser()
 parser.add_argument("--lr", default=0.0001, type = float)  # learning rate
-parser.add_argument("--gpu", default='1')                  # gpu id
+parser.add_argument("--gpu", default='0')                  # gpu id
 parser.add_argument("--savedir", default= 'VGG_seg')         # saving path.
 parser.add_argument("--backup", default=False, type=bool)   # whether to save weights after each epoch.
                                                            # (If True, it will cost lots of memories)
@@ -181,8 +181,9 @@ if __name__ == '__main__':
                 history_batch.append([iter, bid, logs])
 
         # training on the rest data.
-        model.train_on_batch(x_train[index[-(rest_size+1) : -1]],
-                             y_train[index[-(rest_size+1) : -1]])
+        if rest_size > 0:
+            model.train_on_batch(x_train[index[batch_amount*m_batchSize : ]],
+                                y_train[index[batch_amount*m_batchSize : ]])
 
         # one epoch is done. Do some information collections.
         train_iter_loss = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)
@@ -196,7 +197,7 @@ if __name__ == '__main__':
 
         if val_iter_loss < best_val_loss:  # save the best model on Validation set.
             RemoveDir(best_model_name)
-            best_model_name = dir_results + "model_vggseg_{}.h5".format(val_iter_loss)
+            best_model_name = dir_results + "model_vggseg_onVal_{}.h5".format(val_iter_loss)
             model.save_weights(best_model_name)
             best_val_loss = val_iter_loss
             best_train_loss = train_iter_loss
@@ -214,21 +215,23 @@ if __name__ == '__main__':
 
     # save the training information.
     wb = Workbook()
-    ws1 = wb.active
-    ws2 = wb.create_sheet("iter loss")
+    ws1 = wb.active                         # MSE/MLAE
+    ws1.title = "MLAE_MSE"
+    ws2 = wb.create_sheet("EPOCH loss")      # iteration loss
+    ws3 = wb.create_sheet("BATCH loss")     # batch loss
 
-    ws1.append(["Iter ID", "Batch ID", "MSE Loss"])
-    ws2.append(["Iter ID", "Train MSE Loss", "Val MSE Loss"])
-    for i in range(len(history_batch)):
-        ws1.append(history_batch[i])
+    ws2.append(["Epoch ID", "Train MSE Loss", "Val MSE Loss"])
+    ws3.append(["Epoch ID", "Batch ID", "MSE Loss"])
     for i in range(len(history_iter)):
         ws2.append(history_iter[i])
-    ws2.append(["Train loss", best_train_loss])
-    ws2.append(["Val loss", best_val_loss])
-    ws2.append(["Test loss", test_loss])
-    ws2.append(["Train MLAE", MLAE_train])
-    ws2.append(["val MLAE", MLAE_val])
-    ws2.append(["Test MLAE", MLAE_test])
+    for i in range(len(history_batch)):
+        ws3.append(history_batch[i])
+    ws1.append(["Train loss", best_train_loss])
+    ws1.append(["Val loss", best_val_loss])
+    ws1.append(["Test loss", test_loss])
+    ws1.append(["Train MLAE", MLAE_train])
+    ws1.append(["val MLAE", MLAE_val])
+    ws1.append(["Test MLAE", MLAE_test])
 
     wb.save(dir_results + "train_info.xlsx")
 

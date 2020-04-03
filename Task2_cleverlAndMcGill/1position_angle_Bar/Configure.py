@@ -9,7 +9,7 @@ class Config:
     # image configuration
     image_width = 100
     image_height = 100
-    max_obj_num = 5      # The MAXIMUM object number (also the output-dim of networks.)
+    max_obj_num = 5     # The MAXIMUM object number (also the output-dim of networks.)
 
     # Do not change the following settings
     chartName = "img_{}.png"
