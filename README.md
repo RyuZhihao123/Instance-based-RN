@@ -178,6 +178,10 @@ Codes:
 [[Num100]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_100)
 [[Num1000]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task2_cleverlAndMcGill/3point_cloud_1000)
 
+| MSE(MLAE) | VGG | RN | IRN_p (!!!) |
+| ----- | -----  |  -----| ----- |
+| Base10 | 0.000099(-0.17)  | 0.002772(2.06)  | **0.000016(-1.26)** |
+| Base100 | -(-)  | 0.005228(2.56)  | **0.000045(-0.65)** |
 
 ## Experiments3: Supplement 
 
