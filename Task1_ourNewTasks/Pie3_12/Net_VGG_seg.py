@@ -57,7 +57,7 @@ def LoadSeparateChartDataSet(flag = 'train'):
 
     __max_load_num, __dirSubPath, __path_groundTruth = GetInformation(flag)
 
-    images = np.ones((__max_load_num, Config.image_height, config.image_width, config.max_obj_num ), dtype='float32')
+    images = np.ones((__max_load_num, config.image_height, config.image_width, config.max_obj_num ), dtype='float32')
     count = 0
     os.chdir(__dirSubPath)
     for imgID in range(__max_load_num):
