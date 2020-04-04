@@ -57,7 +57,7 @@ def LoadSeparateChartDataSet(flag = 'train'):
 
     __max_load_num, __dirSubPath, __path_groundTruth = GetInformation(flag)
 
-    images = np.ones((__max_load_num, config.max_obj_num , Config.image_height, config.image_width), dtype='float32')
+    images = np.ones((__max_load_num, Config.image_height, config.image_width, config.max_obj_num ), dtype='float32')
     count = 0
     os.chdir(__dirSubPath)
     for imgID in range(__max_load_num):
@@ -65,13 +65,12 @@ def LoadSeparateChartDataSet(flag = 'train'):
             imagePath = config.subChartName.format(imgID, barID)
 
             if os.path.exists(imagePath):  # if file exists.
-                images[imgID][barID] = cv2.cvtColor(cv2.imread(imagePath), cv2.COLOR_RGB2GRAY) / 255.
+                images[imgID,:,:,barID] = cv2.cvtColor(cv2.imread(imagePath), cv2.COLOR_RGB2GRAY) / 255.
 
         if count % 5000 == 0:
             print("Loaded: {}/{}".format(count, __max_load_num))
         count += 1
 
-    images = np.transpose(images, [0, 2, 3, 1])  # exchange the channels into (imageID, height, width, obj)
 
     # read labels from file.
     labels = []

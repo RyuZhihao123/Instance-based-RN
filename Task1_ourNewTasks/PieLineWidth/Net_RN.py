@@ -105,7 +105,8 @@ def SavePredictedResult(sess, x, y, flag = 'train'):
 
 if __name__ == '__main__':
     ClearDir(dir_results)
-    ClearDir(dir_results+"backup")
+    ClearDir(dir_results+"best_model_onTrainset")
+    ClearDir(dir_results+"best_model_onValset")
 
     x_train, y_train = LoadChartDataset(flag='train')
     x_val, y_val = LoadChartDataset(flag='val')
@@ -177,7 +178,7 @@ if __name__ == '__main__':
         # since this network couldn't get good result on validation sets.
         if train_iter_loss < best_train_loss:
             RemoveDir(best_model_name_onTrain)
-            best_model_name_onTrain = dir_results + "model_RN_onTrain_{}.ckpt".format(val_iter_loss)
+            best_model_name_onTrain = dir_results + "best_model_onTrainset/model_RN_onTrain_{}.ckpt".format(val_iter_loss)
             saver.save(sess, best_model_name_onTrain)
             val_loss_using_Train = val_iter_loss
             best_train_loss = train_iter_loss
@@ -185,7 +186,7 @@ if __name__ == '__main__':
         if val_iter_loss < best_val_loss:
             best_val_loss = val_iter_loss
             RemoveDir(best_model_name_onVal)
-            best_model_name_onVal = dir_results + "backup/model_RN_onVal_{}.ckpt".format(val_iter_loss)
+            best_model_name_onVal = dir_results + "best_model_onValset/model_RN_onVal_{}.ckpt".format(val_iter_loss)
             saver_val.save(sess, best_model_name_onVal)
 
 

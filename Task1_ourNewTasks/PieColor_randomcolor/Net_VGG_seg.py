@@ -57,7 +57,7 @@ def LoadSeparateChartDataSet(flag = 'train'):
 
     __max_load_num, __dirSubPath, __path_groundTruth = GetInformation(flag)
 
-    images = np.ones((__max_load_num, config.max_obj_num , Config.image_height, config.image_width), dtype='float32')
+    images = np.ones((__max_load_num, config.image_height, config.image_width, 3*config.max_obj_num), dtype='float32')
     count = 0
     os.chdir(__dirSubPath)
     for imgID in range(__max_load_num):
@@ -65,13 +65,11 @@ def LoadSeparateChartDataSet(flag = 'train'):
             imagePath = config.subChartName.format(imgID, barID)
 
             if os.path.exists(imagePath):  # if file exists.
-                images[imgID][barID] = cv2.cvtColor(cv2.imread(imagePath), cv2.COLOR_RGB2GRAY) / 255.
+                images[imgID, : , : , 3*barID:3*(barID+1)] = cv2.imread(imagePath) / 255.
 
         if count % 5000 == 0:
             print("Loaded: {}/{}".format(count, __max_load_num))
         count += 1
-
-    images = np.transpose(images, [0, 2, 3, 1])  # exchange the channels into (imageID, height, width, obj)
 
     # read labels from file.
     labels = []
@@ -98,11 +96,11 @@ def LoadSeparateChartDataSet(flag = 'train'):
 
 # VGG that is same as Daniel's code.
 def VGG():
-    feature_generator = keras.applications.VGG19(weights=None, include_top=False, input_shape=(100, 100, config.max_obj_num))
+    feature_generator = keras.applications.VGG19(weights=None, include_top=False, input_shape=(100, 100, 3*config.max_obj_num))
 
     MLP = models.Sequential()
     MLP.add(layers.Flatten(input_shape=feature_generator.output_shape[1:]))
-    MLP.add(layers.Dense(256, activation='relu', input_dim=(100, 100, config.max_obj_num)))
+    MLP.add(layers.Dense(256, activation='relu', input_dim=(100, 100, 3*config.max_obj_num)))
     MLP.add(layers.Dropout(0.5))
     MLP.add(layers.Dense(config.max_obj_num, activation='linear'))  # REGRESSION
 
