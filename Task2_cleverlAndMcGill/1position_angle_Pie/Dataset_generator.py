@@ -8,9 +8,9 @@ from ClevelAndMcGill.Figure3 import Figure3
 
 config = Config()
 
-train_num = 600
-val_num   = 200
-test_num  = 200
+train_num = 60000
+val_num   = 20000
+test_num  = 20000
 
 
 def Normalize(arr):
