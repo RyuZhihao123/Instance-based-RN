@@ -100,7 +100,7 @@ if __name__ == '__main__':
 
             i1, i2, label = GenerateOneChart(origin_num=original_num)
             if _count % 200 == 0:
-                print(" Generated {} charts".format(_count))
+                print(" Generated {}/{} charts".format(_count, image_num))
 
             cv2.imwrite(dir_charts + config.subChartName.format(_count, 0), i1 * 255)
             cv2.imwrite(dir_charts + config.subChartName.format(_count, 1), i2 * 255)
