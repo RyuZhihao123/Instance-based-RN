@@ -144,7 +144,7 @@ Codes:
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Position_angle.png"/></div>
 
-| MSE(MLAE) | VGG | RN | IRN_p (!!!) |
+| MSE(MLAE) | VGG | RN | IRN_m (!!!) |
 | ----- | -----  |  -----| ----- |
 | Bar chart | 0.00016(0.21)  | 0.00394(2.34)  | **0.00014(-0.31)** |
 | Pie chart | 0.00028(0.57)  | 0.00390(2.34)  | **0.00021(0.11)** |
