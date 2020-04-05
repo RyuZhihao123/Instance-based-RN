@@ -51,11 +51,11 @@ dir_results   = os.path.abspath(".") + "/results/{}/".format(a.savedir)    # bac
 
 def GetInformation(flag):
     if flag == 'train':
-        return train_num, config.dir_subCharts_train, config.path_groundTruth_train
+        return train_num, config.dir_Charts_train, config.path_groundTruth_train
     if flag == 'val':
-        return val_num, config.dir_subCharts_val, config.path_groundTruth_val
+        return val_num, config.dir_Charts_val, config.path_groundTruth_val
     if flag == 'test':
-        return test_num, config.dir_subCharts_test, config.path_groundTruth_test
+        return test_num, config.dir_Charts_test, config.path_groundTruth_test
 
 def LoadDataset(flag = 'train'):    # must be 'train' or 'val' or 'test'
 

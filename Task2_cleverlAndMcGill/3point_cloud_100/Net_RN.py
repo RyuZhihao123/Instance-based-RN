@@ -56,7 +56,7 @@ def LoadChartDataset(flag = 'train'):
 
     images = []
     for i in range(__max_load_num):
-        fileName = __dirPath+config.chartName.format(i)
+        fileName = __dirPath+config.subChartName.format(i,1)   # only load the second sub-chart
         images.append(cv2.imread(fileName))
 
     labels = []
