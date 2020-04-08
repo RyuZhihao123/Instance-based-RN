@@ -17,8 +17,6 @@ max_train_obj = config.max_obj_num
 min_test_obj = 3
 max_test_obj = config.max_obj_num
 
-noise_amplitude = 0.025  # noise amplitude
-
 def Normalize(arr):
     return arr / np.sum(arr)
 

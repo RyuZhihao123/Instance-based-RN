@@ -32,7 +32,7 @@ m_print_loss_step = 15      # print once after how many iterations.
 parser = argparse.ArgumentParser()
 parser.add_argument("--lr", default=0.0001, type = float)  # learning rate
 parser.add_argument("--gpu", default='0')                  # gpu id
-parser.add_argument("--savedir", default= 'IRNm_old')         # saving path.
+parser.add_argument("--savedir", default= 'IRNm')           # saving path.
 parser.add_argument("--backup", default=False, type=bool)   # whether to save weights after each epoch.
                                                            # (If True, it will cost lots of memories)
 a = parser.parse_args()
@@ -120,17 +120,15 @@ def Level1_Module():
     x = non_local_block(x)   # non local block
     return Model(inputs=input, outputs=x)
 
-# IRN_p module is to estimate the ratio between one pair.
-# Level1 has one NON-LOCAL block.
-def IRN_p_Module():
-    inputA = Input(shape=(config.image_height, config.image_width, 3))
-    inputB = Input(shape=(config.image_height, config.image_width, 3))
+# Level2 module is to compute the ratio of a pair.
+# Level2 has one NON-LOCAL block.
+def Level2_Module(w,h,c):
+    print("Level2:", w,h,c)
 
-    level1 = Level1_Module()  # build a level1 module
-    a = level1(inputA)        # extract two individual features.
-    b = level1(inputB)
+    inputA = Input(shape=(w, h, c))
+    inputB = Input(shape=(w, h, c))
 
-    combined = keras.layers.concatenate([a, b])   # concatenate them.
+    combined = keras.layers.concatenate([inputA, inputB])   # concatenate them.
     z = Conv2D(64, (3, 3), activation='relu',padding='same')(combined)
     z = Conv2D(64, (3, 3), activation='relu', padding='same')(z)
     z = non_local_block(z)   # non local block
@@ -142,8 +140,10 @@ def IRN_p_Module():
 
     return Model(inputs=[inputA, inputB], outputs=z)
 
-# IRN_m network is to estimate the ratio vectors from multiple input instances.
-def Build_IRN_m_Network(is_Using_Pretrained_Weights = False):
+
+
+# IRN_m is final network to estimate the ratio vectors from multiple input instances.
+def Build_IRN_m_Network():
     # input layers.
     input_layers = []
     # the first 'obj_num' inputs are corresponding to the input sub-charts.
@@ -157,14 +157,21 @@ def Build_IRN_m_Network(is_Using_Pretrained_Weights = False):
     R1_one_input = Input(shape=(1,),name="input_constant_scalar1",dtype='float32')   # always equal to 1.0.
     input_layers.append(R1_one_input)
 
-    # Use a IRN_p module to predict pairwise ratios.
-    IRN1 = IRN_p_Module()
-    if is_Using_Pretrained_Weights:
-        IRN1.load_weights("pretrained.h5")
+    # First extract individual features.
+    individual_features = []
+    level1 = Level1_Module()  # build a level1 module
+    for i in range(config.max_obj_num):
+        x = level1(input_layers[i])
+        individual_features.append(x)
+
+    # Use a Level2 module to predict pairwise ratios.
+    level2 = Level2_Module(w=int(individual_features[0].shape[1]),
+                           h=int(individual_features[0].shape[2]),
+                           c=int(individual_features[0].shape[3]))
 
     ratio_p_layers = [R1_one_input]   # pairwise ratio vector. put in' R1=(o1/o1)=1.0 '.
     for i in range(config.max_obj_num-1): # compute the ratio of each neighbor pair.
-        x = IRN1(inputs = [input_layers[i], input_layers[i+1]])
+        x = level2(inputs = [individual_features[i], individual_features[i+1]])
         ratio_p_layers.append(x)
 
     print("ratio_p_layers", len(ratio_p_layers), ratio_p_layers[-1].shape)
@@ -233,9 +240,6 @@ if __name__ == '__main__':
     model = Build_IRN_m_Network()
     model.compile(loss='mse', optimizer=m_optimizer)
 
-    # from keras.utils import plot_model
-    # plot_model(model, to_file='C:/Users/liuzh/Desktop/model.png', show_shapes=True)
-
     print("----------Training-------------------")
     history_batch = []
     history_iter = []
@@ -246,6 +250,7 @@ if __name__ == '__main__':
     best_val_loss = 99999.99999
     best_model_name = "xxxxx"
     best_train_loss = 99999.99999
+
 
     for iter in range(m_epoch):
 
@@ -270,7 +275,7 @@ if __name__ == '__main__':
         # training on the rest data.
         if rest_size > 0:
             model.train_on_batch(x=[ x_train[i][index[batch_amount*m_batchSize : ]] for i in range(config.max_obj_num+1)],
-                                y=y_train[index[batch_amount*m_batchSize : ]])
+                                 y=y_train[index[batch_amount*m_batchSize : ]])
 
         # one epoch is done. Do some information collections.
         epoch_loss_train = model.evaluate(x=x_train, y=y_train, verbose=0, batch_size=m_batchSize)
@@ -299,12 +304,13 @@ if __name__ == '__main__':
     MLAE_val = SavePredictedResult(x_val, y_val, 'val')
     MLAE_test = SavePredictedResult(x_test,y_test,'test')
 
+
     # save the training information.
     wb = Workbook()
-    ws1 = wb.active  # MSE/MLAE
+    ws1 = wb.active                         # MSE/MLAE
     ws1.title = "MLAE_MSE"
-    ws2 = wb.create_sheet("EPOCH loss")  # iteration loss
-    ws3 = wb.create_sheet("BATCH loss")  # batch loss
+    ws2 = wb.create_sheet("EPOCH loss")      # iteration loss
+    ws3 = wb.create_sheet("BATCH loss")     # batch loss
 
     ws2.append(["Epoch ID", "Train MSE Loss", "Val MSE Loss"])
     ws3.append(["Epoch ID", "Batch ID", "MSE Loss"])
@@ -329,5 +335,3 @@ if __name__ == '__main__':
     print("Training MLAE:", MLAE_train)
     print("Validat. MLAE:", MLAE_val)
     print("Testing MLAE:", MLAE_test)
-
-
