@@ -21,7 +21,7 @@ def Normalize(arr):
     return arr / np.sum(arr)
 
 # generate a chart with number=num objects.
-def GenerateOnePieChart(num, size = config.image_width):
+def GenerateOneBarChart(num, size = config.image_width):
 
     colors = np.random.uniform(0.0, 0.9,size = (config.max_obj_num,3))
 
@@ -29,24 +29,23 @@ def GenerateOnePieChart(num, size = config.image_width):
     subImages = [np.ones(shape=(size,size,3)) for i in range(config.max_obj_num)]
     heights = np.random.randint(10,80,size=(num))
 
-    # 根据需求调整就好（图像大小100/150，barwidth的随机可以是60-100/80-100）
+    barWidth = int( (size-3*(num+1)-3)//num * (np.random.randint(50,100)/100.0) )
+    barWidth = max(barWidth, 4)
+    spaceWidth = (size-(barWidth)*num)//(num+1)
 
-    barWidth = int( (size-4*(num+1)-4)//num * (np.random.randint(60,100)/100.0) )   # 单个bar的实际占用空间（随机的）
-    spaceWidth = (size-barWidth*num)//(num+1)
-    sx = 2
+    sx = (size - barWidth*num - spaceWidth*(num-1))//2
     for i in range(num):
 
-        sx += spaceWidth
         sy = size - 1
         ex = sx + barWidth
         ey = sy - heights[i]
 
         cv2.rectangle(image,(sx,sy),(ex,ey),colors[i],-1)
         cv2.rectangle(subImages[i],(sx,sy),(ex,ey),colors[i],-1)
-        sx = ex
+        sx = ex + spaceWidth
 
     # add noise
-    noises = np.random.uniform(0, 0.05, (size, size,1))
+    noises = np.random.uniform(0, 0.05, (size, size,3))
     image = image + noises
     _min = 0.0
     _max = image.max()
@@ -54,7 +53,7 @@ def GenerateOnePieChart(num, size = config.image_width):
     image /= (_max - _min)
 
     for i in range(len(subImages)):
-        noises = np.random.uniform(0, 0.05, (size, size, 1))
+        noises = np.random.uniform(0, 0.05, (size, size, 3))
         subImages[i] = subImages[i] + noises
         _min = 0.0
         _max = subImages[i].max()
@@ -116,7 +115,7 @@ if __name__ == '__main__':
         max_num_obj = max_train_obj if i == 0 else max_test_obj
 
         for i in range(image_num):
-            image, subImages, featureVector = GenerateOnePieChart(
+            image, subImages, featureVector = GenerateOneBarChart(
                 num=np.random.randint(min_num_obj, max_num_obj + 1))
 
             if i % 200 == 0:

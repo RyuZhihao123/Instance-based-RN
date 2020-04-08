@@ -11,9 +11,9 @@ train_num = 60000
 val_num   = 20000
 test_num  = 20000
 
-# The colors used in training set.
-train_colors = np.array( [(0.541176,0.270588,0.341176),(0.486275,0.709804,0.88549),(0.564706,0.89549,0.490196),
-          (0.894706,0.639216,0.364706),(0.505882,0.521569,0.883725),(0.891961,0.831373,0.337255)])
+#  set the RANGE of line width for training and testing set respectively
+thickness_train = [1]
+thickness_test  = [2, 3]
 
 #  set the RANGE of object NUMBER for both training and testing set respectively
 min_train_obj = 3
@@ -25,18 +25,14 @@ def Normalize(arr):
     return arr / np.sum(arr)
 
 # generate a chart with number=num objects.
-def GenerateOneBarChart(num, size = config.image_width, random_color = True):
+def GenerateOneBarChart(num, size = config.image_width, thickness = 1):
 
-    colors = train_colors if random_color==False else np.random.uniform(0.0, 0.9,size = (config.max_obj_num,3))
-    if random_color == False:
-        np.random.shuffle(colors)
-
-    image = np.ones(shape=(size, size, 3))
-    subImages = [np.ones(shape=(size,size,3)) for i in range(config.max_obj_num)]
+    image = np.ones(shape=(size, size, 1))
+    subImages = [np.ones(shape=(size,size,1)) for i in range(config.max_obj_num)]
     heights = np.random.randint(10,80,size=(num))
 
-    barWidth = int( (size-3*(num+1)-3)//num * (np.random.randint(50,100)/100.0) )
-    barWidth = max(barWidth, 4)
+    barWidth = int( (size-5*(num+1)-4)//num * (np.random.randint(60,100)/100.0) )
+    barWidth = max(barWidth, 6)
     spaceWidth = (size-(barWidth)*num)//(num+1)
 
     sx = (size - barWidth*num - spaceWidth*(num-1))//2
@@ -46,22 +42,22 @@ def GenerateOneBarChart(num, size = config.image_width, random_color = True):
         ex = sx + barWidth
         ey = sy - heights[i]
 
-        cv2.rectangle(image,(sx,sy),(ex,ey),colors[i],-1)
-        cv2.rectangle(subImages[i],(sx,sy),(ex,ey),colors[i],-1)
+        cv2.rectangle(image,(sx,sy),(ex,ey),0,thickness)
+        cv2.rectangle(subImages[i],(sx,sy),(ex,ey),0,thickness)
         sx = ex + spaceWidth
 
     # add noise
-    noises = np.random.uniform(0, 0.05, (size, size,3))
+    noises = np.random.uniform(0, 0.05, (size, size,1))
     image = image + noises
-    _min = 0.0
+    _min = image.min()
     _max = image.max()
     image -= _min
     image /= (_max - _min)
 
     for i in range(len(subImages)):
-        noises = np.random.uniform(0, 0.05, (size, size, 3))
+        noises = np.random.uniform(0, 0.05, (size, size, 1))
         subImages[i] = subImages[i] + noises
-        _min = 0.0
+        _min = subImages[i].min() if i<num else 0.0
         _max = subImages[i].max()
         subImages[i] -= _min
         subImages[i] /= (_max - _min)
@@ -120,11 +116,12 @@ if __name__ == '__main__':
         min_num_obj = min_train_obj if i == 0 else min_test_obj
         max_num_obj = max_train_obj if i == 0 else max_test_obj
 
-        isRandomColor = False if i==0 else True
+        thickness_set = thickness_train if i==0 else thickness_test
 
         for i in range(image_num):
             image, subImages, featureVector = GenerateOneBarChart(
-                num=np.random.randint(min_num_obj, max_num_obj + 1), random_color=isRandomColor)
+                num=np.random.randint(min_num_obj, max_num_obj + 1),
+                thickness=thickness_set[np.random.randint(len(thickness_set))])
 
             if i % 200 == 0:
                 print("   id {} (obj_num = {})".format(i, len(subImages)))
