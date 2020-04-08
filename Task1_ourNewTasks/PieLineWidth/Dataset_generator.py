@@ -44,13 +44,13 @@ def GenerateOnePieChart(num, size = 100, thickness = 1):
 
     for i in range(num):
         _cur_end_angle = _cur_start_angle + angles[i] * 360.0
-        cv2.line(image,center, (int(50-r*math.sin(math.pi*_cur_start_angle/180.0)),
-                                int(50-r*math.cos(math.pi*_cur_start_angle/180.0))),0,thickness)
+        cv2.line(image,center, (50-int(r*math.sin(math.pi*_cur_start_angle/180.0)),
+                                50-int(r*math.cos(math.pi*_cur_start_angle/180.0))),0,thickness)
 
-        cv2.line(subImages[i], center, (int(50-r*math.sin(math.pi*_cur_start_angle/180.0)),
-                                        int(50-r*math.cos(math.pi*_cur_start_angle/180.0))),0,thickness)
-        cv2.line(subImages[i], center, (int(50 - r * math.sin(math.pi * _cur_end_angle / 180.0)),
-                                        int(50 - r * math.cos(math.pi * _cur_end_angle / 180.0))), 0, thickness)
+        cv2.line(subImages[i], center, (50-int(r*math.sin(math.pi*_cur_start_angle/180.0)),
+                                        50-int(r*math.cos(math.pi*_cur_start_angle/180.0))),0,thickness)
+        cv2.line(subImages[i], center, (50 - int(r * math.sin(math.pi * _cur_end_angle / 180.0)),
+                                        50 - int(r * math.cos(math.pi * _cur_end_angle / 180.0))), 0, thickness)
         cv2.ellipse(subImages[i],center,(r,r),270,-_cur_start_angle,-_cur_end_angle,0,thickness)
         _cur_start_angle = _cur_end_angle
 

@@ -23,7 +23,6 @@ def Normalize(arr):
 # generate a chart with number=num objects.
 def GenerateOnePieChart(num, size = 100):
     r = np.random.randint(25,45)        # Radii of the pie. (random)
-    thickness = np.random.randint(1,3)  # line thickness.   (random)
 
     center = (int(size/2),int(size/2))  #
     image = np.ones(shape=(size, size, 1))
@@ -32,18 +31,18 @@ def GenerateOnePieChart(num, size = 100):
 
     start_angle = 90 - np.random.randint(0,360*angles[0])/2.0
     _cur_start_angle = start_angle
-    cv2.circle(image,center,r,0,thickness)
+    cv2.circle(image,center,r,0,1)
 
     for i in range(num):
         _cur_end_angle = _cur_start_angle + angles[i] * 360.0
-        cv2.line(image,center, (int(50-r*math.sin(math.pi*_cur_start_angle/180.0)),
-                                int(50-r*math.cos(math.pi*_cur_start_angle/180.0))),0,thickness)
+        cv2.line(image,center, (50-int(r*math.sin(math.pi*_cur_start_angle/180.0)),
+                                50-int(r*math.cos(math.pi*_cur_start_angle/180.0))),0,1)
 
-        cv2.line(subImages[i], center, (int(50-r*math.sin(math.pi*_cur_start_angle/180.0)),
-                                        int(50-r*math.cos(math.pi*_cur_start_angle/180.0))),0,thickness)
-        cv2.line(subImages[i], center, (int(50 - r * math.sin(math.pi * _cur_end_angle / 180.0)),
-                                        int(50 - r * math.cos(math.pi * _cur_end_angle / 180.0))), 0, thickness)
-        cv2.ellipse(subImages[i],center,(r,r),270,-_cur_start_angle,-_cur_end_angle,0,thickness)
+        cv2.line(subImages[i], center, (50-int(r*math.sin(math.pi*_cur_start_angle/180.0)),
+                                        50-int(r*math.cos(math.pi*_cur_start_angle/180.0))),0,1)
+        cv2.line(subImages[i], center, (50 - int(r * math.sin(math.pi * _cur_end_angle / 180.0)),
+                                        50 - int(r * math.cos(math.pi * _cur_end_angle / 180.0))), 0, 1)
+        cv2.ellipse(subImages[i],center,(r,r),270,-_cur_start_angle,-_cur_end_angle,0,1)
         _cur_start_angle = _cur_end_angle
 
     # add noise
