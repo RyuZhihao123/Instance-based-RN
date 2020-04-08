@@ -222,7 +222,7 @@ if __name__ == '__main__':
         ws2.append(history_iter[i])
     for i in range(len(history_batch)):
         ws3.append(history_batch[i])
-    ws1.append(["----------", "Using best model on train_set"])
+    ws1.append(["----------", "Using best model on train_set    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"])
     ws1.append(["Best Train loss", best_train_loss])
     ws1.append(["Val loss usingTrain", val_loss_using_Train])
     ws1.append(["Test loss usingTrain", test_loss_usingTrain])

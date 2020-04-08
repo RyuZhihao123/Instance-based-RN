@@ -237,7 +237,7 @@ if __name__ == '__main__':
     ws1.append(["Train MLAE", MLAE_train])
     ws1.append(["val MLAE", MLAE_val])
     ws1.append(["Test MLAE", MLAE_test])
-    ws1.append(["----------", "Using best model on val_set"])
+    ws1.append(["----------", "Using best model on val_set    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"])
     ws1.append(["Train loss usingVal", train_loss_onVal])
     ws1.append(["Best Val loss", best_val_loss])
     ws1.append(["Test loss usingVal", test_loss_onVal])

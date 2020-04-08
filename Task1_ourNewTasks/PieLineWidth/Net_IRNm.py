@@ -246,10 +246,14 @@ if __name__ == '__main__':
     batch_amount = train_num // m_batchSize
     rest_size = train_num - (batch_amount*m_batchSize)
 
-    # information of the best model on validation set.
-    best_val_loss = 99999.99999
-    best_model_name = "xxxxx"
+    # best model according to the training loss. (Since this network can't deal with this generalization task)
     best_train_loss = 99999.99999
+    val_loss_using_Train = 99999.99999    # corresponding val loss using the best model on training set.
+    best_model_name_onTrain = "xxxxx"
+
+    # best model according to val loss.
+    best_val_loss = 99999.999999
+    best_model_name_onVal = "xxxxx"
 
 
     for iter in range(m_epoch):
@@ -283,26 +287,40 @@ if __name__ == '__main__':
         history_iter.append([iter, epoch_loss_train, epoch_loss_val])
         print("----- epoch({}/{}) train_loss={}, val_loss={}".format(iter, m_epoch, epoch_loss_train, epoch_loss_val))
 
-        if a.backup == True:   # whether to save the weight after each epoch
-            model.save_weights(dir_results+"backup"+"/model_{}_{}.h5".format(iter, epoch_loss_val))
+        # if a.backup == True:   # whether to save the weight after each epoch
+        #     model.save_weights(dir_results+"backup"+"/model_{}_{}.h5".format(iter, epoch_loss_val))
+
+        if epoch_loss_train < best_train_loss:
+            RemoveDir(best_model_name_onTrain)
+            best_model_name_onTrain = dir_results + "model_irnm_onTrain_{}.h5".format(epoch_loss_val)
+            model.save_weights(best_model_name_onTrain)
+            val_loss_using_Train = epoch_loss_val
+            best_train_loss = epoch_loss_train
 
         if epoch_loss_val < best_val_loss:  # save the best model on Validation set.
-            RemoveDir(best_model_name)
-            best_model_name = dir_results + "model_irnm_onVal_{}.h5".format(epoch_loss_val)
-            model.save_weights(best_model_name)
             best_val_loss = epoch_loss_val
-            best_train_loss = epoch_loss_train
+            RemoveDir(best_model_name_onVal)
+            best_model_name_onVal = dir_results + "model_irnm_onVal_{}.h5".format(epoch_loss_val)
+            model.save_weights(best_model_name_onVal)
+
 
 
     # test on the testing set.
-    model.load_weights(best_model_name)   # using the best model
-    test_loss = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
+    model.load_weights(best_model_name_onTrain)   # using the best model
+    test_loss_usingTrain = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
 
 
     # Save the predicted results and return the MLAE.
-    MLAE_train = SavePredictedResult(x_train,y_train,'train')
-    MLAE_val = SavePredictedResult(x_val, y_val, 'val')
-    MLAE_test = SavePredictedResult(x_test,y_test,'test')
+    MLAE_train = SavePredictedResult(x_train,y_train,'train_usingTrain')
+    MLAE_val = SavePredictedResult(x_val, y_val, 'val_usingTrain')
+    MLAE_test = SavePredictedResult(x_test,y_test,'test_usingTrain')
+
+    model.load_weights(best_model_name_onVal)   # using the best model.
+    train_loss_onVal = model.evaluate(x_train, y_train, verbose=0, batch_size=m_batchSize)
+    test_loss_onVal = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
+    MLAE_train_onVal = SavePredictedResult(x_train,y_train,'train_usingVal')
+    MLAE_val_onVal = SavePredictedResult(x_val, y_val, 'val_usingVal')
+    MLAE_test_onVal = SavePredictedResult(x_test, y_test, 'test_usingVal')
 
 
     # save the training information.
@@ -320,18 +338,35 @@ if __name__ == '__main__':
     for i in range(len(history_batch)):
         ws3.append(history_batch[i])
 
-    ws1.append(["Train loss", best_train_loss])
-    ws1.append(["Val loss", best_val_loss])
-    ws1.append(["Test loss", test_loss])
+    ws1.append(["----------", "Using best model on train_set"])
+    ws1.append(["Best Train loss", best_train_loss])
+    ws1.append(["Val loss usingTrain", val_loss_using_Train])
+    ws1.append(["Test loss usingTrain", test_loss_usingTrain])
     ws1.append(["Train MLAE", MLAE_train])
     ws1.append(["val MLAE", MLAE_val])
     ws1.append(["Test MLAE", MLAE_test])
+    ws1.append(["----------", "Using best model on val_set    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"])
+    ws1.append(["Train loss usingVal", train_loss_onVal])
+    ws1.append(["Best Val loss", best_val_loss])
+    ws1.append(["Test loss usingVal", test_loss_onVal])
+    ws1.append(["Train MLAE using Val", MLAE_train_onVal])
+    ws1.append(["Val MLAE using Val", MLAE_val_onVal])
+    ws1.append(["Test MLAE using Val", MLAE_test_onVal])
 
     wb.save(dir_results + "train_info.xlsx")
 
+    print("-----Using the best model according to training loss-------")
     print("Training MSE:", best_train_loss)
-    print("Validat. MSE:", best_val_loss)
-    print("Testing MSE:", test_loss)
+    print("Validat. MSE", val_loss_using_Train)
+    print("Testing MSE:", test_loss_usingTrain)
     print("Training MLAE:", MLAE_train)
-    print("Validat. MLAE:", MLAE_val)
+    print("Validat. MLAE", MLAE_val)
     print("Testing MLAE:", MLAE_test)
+
+    print("-----Using the best model according to Validation loss-------")
+    print("Training MSE:", train_loss_onVal)
+    print("Validat. MSE:", best_val_loss)
+    print("Testing MSE:", test_loss_onVal)
+    print("Training MLAE:", MLAE_train_onVal)
+    print("Validat. MLAE", MLAE_val_onVal)
+    print("Testing MLAE:", MLAE_test_onVal)
