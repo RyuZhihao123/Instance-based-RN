@@ -56,7 +56,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 * `The range of object number` are different between training and testing sets. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors. For VGG, RN and IRNm, all the outputs are `9-dim vector`.
 
-<div align=center><img width="700" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png"/></div>
+<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png"/></div>
 
 <div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png"/></div>
 
@@ -75,7 +75,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 * `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3. In addition, the output of networks is 6-dim vector, and each chart contains 3 to 6 pie sectors.
 
-<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png"/></div>
+<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png"/></div>
 
 * Due to different line width, PieLineWidth is unlike PieNumber whose training and testing sets have same appearence domain. However, the result is surprising. **We found that both IRN_p and IRN_m can get a good result in testing set.**. That means if we segmeneted objects in advance and directly using CNN to extract their individual features, it does make some effect.
 
@@ -116,7 +116,7 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 * This task is to test the performance when the maximun object number is large and the number changes greatly. The object number in both training and testing sets is 3 to 6 (12) for task Pie3_6(Pie3_12).  I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
-<div align=center><img width="700" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12.png"/></div>
+<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12.png"/></div>
 
 * **It's clear that VGG and RN performs worse when the number of objects increased, as the following results proved. Whereas, our network, IRN_m can still perform very nice**. `It seems that the MLAE of VGG increases more significantly than MSE.`
 
