@@ -50,45 +50,26 @@ To make the generalization ability of our network more powerful, we redesgin the
 
 Note that: **For most tasks, we use the best model on validation set to compute its final MSE and MLAE etc**. However, VGG, VGG_seg and RN don't have strong generalization abilibity so that they can not deal with the validation/testing sets in `PieNumber` and `PieLineWidth`. It may happen that the network has obtained the lowest loss on validation sets but it still doesn't converage on training set. Therefor, to evaluate them better, **only for VGG and RN in PieNumber and PieLineWidth tasks**, we use the best model on training set instead of on validation set to compute the MSE on training set, while we still use the best model on validation set to compute its MSE on testing sets.
 
-### Task1.1: PieNumber.
+### Task1.1: Pie3_6 and Pie3_12
 
-[[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
+[[Pie3_6 Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_6)  [[Pie3_12 Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
 
-* `The range of object number` are different between training and testing sets. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors. For VGG, RN and IRNm, all the outputs are `9-dim vector`.
+* This task is to test the performance when the maximun object number is large and the number changes greatly. The object number in both training and testing sets is 3 to 6 (12) for task Pie3_6(Pie3_12).  I think 12 is large enough since if we use a larger number, the chart would looks messy.
 
-<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png"/></div>
+<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12.png"/></div>
 
-<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png"/></div>
-
-* **Only our IRN_m and IRN_p can get a good result on testing set. (1) Our network can deal with the condition that training and testing sets have different object number. (2) Our network seems converage faster than VGG and RN.** It seems that the validation loss of our IRN_m network has a stronger fluctuation than VGG, but it's not true. Because the order of magnitudes (数量级) of their validation loss are too much different. 
-
-| MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| IRN_m (!!!) |
-| ----- | ----- | ----- | ----- | -----| ----- |
-| Train set | 0.00023(0.18) | 0.00022(0.11) | 0.00289(1.70) | 0.00015(-0.56) | **0.00010(-0.57)** |
-| Test set | 0.13354(4.56) | 0.14972(4.79) | 0.15874(4.84) | 0.00087(0.97) | **0.00058(0.81)** |
-
-![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumberLoss.png)
-
-### Task1.2: PieLineWidth.
-
-[[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
-
-* `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3. In addition, the output of networks is 6-dim vector, and each chart contains 3 to 6 pie sectors.
-
-<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png"/></div>
-
-* Due to different line width, PieLineWidth is unlike PieNumber whose training and testing sets have same appearence domain. However, the result is surprising. **We found that both IRN_p and IRN_m can get a good result in testing set.**. That means if we segmeneted objects in advance and directly using CNN to extract their individual features, it does make some effect.
-
-* For our IRN_m network, val_loss declines with train_loss in the early stage and also keeps for many epochs. We could see that IRN_m network is able to perform very well on val_set as on train_set. However, because we always opitimize the network using train_set, so it's okay and normal that val_loss would become bad on val_set when the network try to get much better results on train_set.
+* **It's clear that VGG and RN performs worse when the number of objects increased, as the following results proved. Whereas, our network, IRN_m can still perform very nice**. `It seems that the MLAE of VGG increases more significantly than MSE.`
 
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
-| Train set | 0.00036(0.69)  | 0.00429(2.26) | 0.00065(0.59) | **0.00018(0.01)** |
-| Test set | 0.06459(4.26)  | 0.05459(4.08) | 0.00160(1.27) | **0.00032(0.33)** |
+| Pie3_6: Train set | 0.00036(0.67)  | 0.00435(2.26) | 0.00016(-0.25) | **0.00012(-0.29)** |
+| Pie3_6: Test set  | 0.00038(0.70)  | 0.00438(2.26) | 0.00017(-0.22) | **0.00012(-0.28)** |
+| Pie3_12: Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **0.00023(0.00)** |
+| Pie3_12: Test set  | 0.00098(1.29)  | 0.00727(2.56) | 0.00041(0.25) | **0.00024(0.02)** |
 
-![Pie LineWidth: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidthLoss.png)
+<div align=center><img width="650" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12Loss.png"/></div>
 
-### Task1.3: PieColor
+### Task1.4: PieColor
 
 [[FixedTrain Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieColor_fixedtrain)  [[RandomColor Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieColor_randomcolor) 
 
@@ -110,24 +91,43 @@ Note that: **For most tasks, we use the best model on validation set to compute 
 
 ![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieColor_random.png)
 
-### Task1.4: Pie3_6 and Pie3_12
+### Task1.2: PieNumber.
 
-[[Pie3_6 Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_6)  [[Pie3_12 Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/Pie3_12) 
+[[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber) 
 
-* This task is to test the performance when the maximun object number is large and the number changes greatly. The object number in both training and testing sets is 3 to 6 (12) for task Pie3_6(Pie3_12).  I think 12 is large enough since if we use a larger number, the chart would looks messy.
+* `The range of object number` are different between training and testing sets. By default, the pie charts in training sets contain 3 to 6 pie sectors, while those in testing sets contain 7 to 9 pie sectors. For VGG, RN and IRNm, all the outputs are `9-dim vector`.
 
-<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12.png"/></div>
+<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumber.png"/></div>
 
-* **It's clear that VGG and RN performs worse when the number of objects increased, as the following results proved. Whereas, our network, IRN_m can still perform very nice**. `It seems that the MLAE of VGG increases more significantly than MSE.`
+<div align=center><img width="350" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Sample.png"/></div>
+
+* **Only our IRN_m and IRN_p can get a good result on testing set. (1) Our network can deal with the condition that training and testing sets have different object number. (2) Our network seems converage faster than VGG and RN.** It seems that the validation loss of our IRN_m network has a stronger fluctuation than VGG, but it's not true. Because the order of magnitudes (数量级) of their validation loss are too much different. 
+
+| MSE(MLAE) | VGG | VGG_seg | RN | IRN_p| IRN_m (!!!) |
+| ----- | ----- | ----- | ----- | -----| ----- |
+| Train set | 0.00023(0.18) | 0.00022(0.11) | 0.00289(1.70) | 0.00015(-0.56) | **0.00010(-0.57)** |
+| Test set | 0.13354(4.56) | 0.14972(4.79) | 0.15874(4.84) | 0.00087(0.97) | **0.00058(0.81)** |
+
+![Pie Number: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieNumberLoss.png)
+
+### Task1.3: PieLineWidth.
+
+[[Codes]](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieLineWidth) 
+
+* `The line width` are different between training and testing sets in this task. By default, the line width of the piechart in training sets is 1, while the width of those in testing sets is 2 or 3. In addition, the output of networks is 6-dim vector, and each chart contains 3 to 6 pie sectors.
+
+<div align=center><img width="750" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidth.png"/></div>
+
+* Due to different line width, PieLineWidth is unlike PieNumber whose training and testing sets have same appearence domain. However, the result is surprising. **We found that both IRN_p and IRN_m can get a good result in testing set.**. That means if we segmeneted objects in advance and directly using CNN to extract their individual features, it does make some effect.
+
+* For our IRN_m network, val_loss declines with train_loss in the early stage and also keeps for many epochs. We could see that IRN_m network is able to perform very well on val_set as on train_set. However, because we always opitimize the network using train_set, so it's okay and normal that val_loss would become bad on val_set when the network try to get much better results on train_set.
 
 | MSE(MLAE) | VGG | RN | IRN_p| IRN_m (!!!) |
 | ----- | -----  | ----- | -----| ----- |
-| Pie3_6: Train set | 0.00036(0.67)  | 0.00435(2.26) | 0.00016(-0.25) | **0.00012(-0.29)** |
-| Pie3_6: Test set  | 0.00038(0.70)  | 0.00438(2.26) | 0.00017(-0.22) | **0.00012(-0.28)** |
-| Pie3_12: Train set | 0.00089(1.24)  | 0.00705(2.54) | 0.00033(0.12) | **0.00023(0.00)** |
-| Pie3_12: Test set  | 0.00098(1.29)  | 0.00727(2.56) | 0.00041(0.25) | **0.00024(0.02)** |
+| Train set | 0.00036(0.69)  | 0.00429(2.26) | 0.00065(0.59) | **0.00018(0.01)** |
+| Test set | 0.06459(4.26)  | 0.05459(4.08) | 0.00160(1.27) | **0.00032(0.33)** |
 
-<div align=center><img width="650" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/Pie3_6_12Loss.png"/></div>
+![Pie LineWidth: Loss](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/PieLineWidthLoss.png)
 
 
 ## Experiments2: ClevelandMcGill
