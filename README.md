@@ -34,9 +34,9 @@ python Dataset_generator.py
 
 * For most tasks, we store the `best model` that obtains the lowest loss on `val_sets` (Exactly speaking, it's the condition that train_set and test_set have same features.). Here is an example output of an RN network.
 
-** ``RN_0.p ~ RN_4.p``: the pickle files corresponding to each experiment. It contains the ``MSE, MLAE`` of train/val/test sets and the ``loss history`` of train/val sets.
+> ``RN_0.p ~ RN_4.p``: the pickle files corresponding to each experiment. It contains the ``MSE, MLAE`` of train/val/test sets and the ``loss history`` of train/val sets.
 
-** ``RN_avg.p``: the pickle files that summarize all experiments. It contains the ``average`` and ``SD`` of MSE and MLAE of train/test sets.
+> ``RN_avg.p``: the pickle files that summarize all experiments. It contains the ``average`` and ``SD`` of MSE and MLAE of train/test sets.
 
 ![](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles_common.png)
 
