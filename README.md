@@ -32,15 +32,15 @@ python Dataset_generator.py
 ```
 ### 3. Output files:
 
-* For most tasks, we store the `best model` that obtains the lowest loss on `val_sets` (Exactly speaking, it's the condition that train_set and test_set have same features.). Here is an example output of an RN network.
+For most tasks, we store the `best model` that obtains the lowest loss on `val_sets` (Exactly speaking, it's the condition that train_set and test_set have same features.). Here is an example output of an RN network.
 
-> ``RN_0.p ~ RN_4.p``: the pickle files corresponding to each experiment. It contains the ``MSE, MLAE`` of train/val/test sets and the ``loss history`` of train/val sets.
+* ``RN_0.p ~ RN_4.p``: the pickle files corresponding to each experiment. It contains the ``MSE, MLAE`` of train/val/test sets and the ``loss history`` of train/val sets.
 
-> ``RN_avg.p``: the pickle files that summarize all experiments. It contains the ``average`` and ``SD`` of MSE and MLAE of train/test sets.
+* ``RN_avg.p``: the pickle files that summarize all experiments. It contains the ``average`` and ``SD`` of MSE and MLAE of train/test sets.
 
 ![](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles_common.png)
 
-* 
+However, we also have some generalization task whose training and test set have different features, e.g, ``PieNumber``, ``PieLineWidth`` and ``PieColor``. In these condition, we not only store the `best results` that obtains the lowest loss on `val_sets`， but also store the `best results` on `train_sets`. That's because VGG and RN can only fit the train_set but cannot fit the val_sets or test_sets. If we observe the loss curve of VGG in `PieColor_fixedTrain` or RN in `PieLineWidth` tasks, we could find it's possible that the val_loss have got the lowest value whereas the train_loss still didn't converge. That's because the network optimized only on train_set, and the val_set is totally different from train_set. So the val_loss don't have any relation with train_loss. Thererfore, I store both two results to show the best performance that the network can achieve on train_set and val_set respectively.
 
 ### 4. Our network structure:
 
