@@ -42,6 +42,10 @@ For most tasks, we store the `best model` that obtains the lowest loss on `val_s
 
 However, we also have some generalization tasks whose training and test set have different features, e.g, ``PieNumber``, ``PieLineWidth`` and ``PieColor``. In these conditions, we not only store the `best results` that obtains the lowest loss on `val_set`， but also store the `best results` on `train_set`. **That's because ``VGG`` and ``RN`` can only fit the train_set well, but cannot fit the val_set and test_set.** If we observe the loss curve of VGG in `PieColor_fixedTrain` or RN in `PieLineWidth` tasks, we could find it's possible that the val_loss have got the lowest value whereas the train_loss still didn't converge. That's because the network optimized only on train_set, and the val_set is totally different from train_set. So the val_loss don't have any relation with train_loss. Thererfore, I store both two results to show the best performance that the network can achieve on train_set and val_set respectively.
 
+The following figure shows an example file ``VGG_0.p`` in PieLineWidth task.
+
+![](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles_general.png)
+
 ### 4. Our network structure:
 
 To make the generalization ability of our network more powerful, we redesgin the IRN_m network, as shown in the following figure. It makes great improvements on the conditions that (1) the training and testing set are different, e.g., `Task1.1 PieNumber`, or (2) the object number is large, for example `task1.3 Pie3_12`.
