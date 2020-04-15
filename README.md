@@ -16,7 +16,7 @@ if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,
 
 For quick experiments, we provide [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) to automatically run the network **5 times by default** and **compute the average and SD of MSE and MLAE**. In PureExperiments, dataset will re-generated every time. 
 
-I'll take **Task1.1 Pie3_6** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times/Task1_ourNewTasks/Pie3_6) as an example to show how to use the codes. 
+* I'll take **Task1.1 Pie3_6** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times/Task1_ourNewTasks/Pie3_6) as an example to show how to use the codes. 
 
 ```
 python Net_VGG.py    --gpu 0 (--times 5)   
@@ -25,13 +25,24 @@ python Net_RN_seg.py --gpu 2 (--times 5)
 python Net_IRNm.py   --gpu 3 (--times 5)  # or `python Net_IRNp.py   --gpu 3 (--times 5)` for pair tasks.
 ```
 
-if you need to check some sample images of dataset, you could run the script as follows to generate a small dataset in current path './datasets/'. This small dataset contains  600/200/200 training/val/test images, including original image, segmented subimages and ground-truths.
+* if you need to check some `sample images of dataset` in local directory, you could run the script as follows to generate a small dataset in current path './datasets/'. This small dataset contains  600/200/200 training/val/test images, including original image, segmented subimages and ground-truths.
 
 ```
 python Dataset_generator.py
 ```
+### 3. Output files:
 
-### 3. Our network structure:
+* For most tasks, we store the `best model` that obtains the lowest loss on `val_sets` (Exactly speaking, it's the condition that train_set and test_set have same features.). Here is an example output of an RN network.
+
+** ``RN_0.p ~ RN_4.p``: the pickle files corresponding to each experiment. It contains the ``MSE, MLAE`` of train/val/test sets and the ``loss history`` of train/val sets.
+
+** ``RN_avg.p``: the pickle files that summarize all experiments. It contains the ``average`` and ``SD`` of MSE and MLAE of train/test sets.
+
+![](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles_common.png)
+
+* 
+
+### 4. Our network structure:
 
 To make the generalization ability of our network more powerful, we redesgin the IRN_m network, as shown in the following figure. It makes great improvements on the conditions that (1) the training and testing set are different, e.g., `Task1.1 PieNumber`, or (2) the object number is large, for example `task1.3 Pie3_12`.
 
