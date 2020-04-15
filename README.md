@@ -14,7 +14,9 @@ if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,
 
 ### 2. Example:
 
-I provide 2 kinds of codes: one is the [(Code_RunOnce)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_RunOnce) that only run the experiments once; the other is [(Code_RunOnce)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) 
+I provide 2 kinds of codes: one is the [Code_RunOnce](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_RunOnce) that only run the experiments once; the other is [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) that could run the network 5 times by default.
+
+
 I'll take **Task1.1 PieNumber** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber)  as an example to show how to use the codes.
 
 * **First, create your own datasets.** The following command will create a `./datasets` folder in current path.
