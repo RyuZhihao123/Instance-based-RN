@@ -14,7 +14,7 @@ if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,
 
 ### 2. Example:
 
-For quick experiments, we provide [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) to automatically run the network **5 times by default** and **compute the average and SD of MSE and MLAE**. In PureExperiments, dataset will re-generated every time. 
+For quick experiments, we provide [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) to automatically run the network **5 times by default** and **compute the average and SD of MSE and MLAE**. In PureExperiments, dataset will automatically re-generated every time. 
 
 * I'll take **Task1.1 Pie3_6** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times/Task1_ourNewTasks/Pie3_6) as an example to show how to use the codes. 
 
