@@ -126,7 +126,7 @@ def GenerateDatasetVGG(flag, image_num):
         image = np.concatenate((i2,i2,i2), axis=-1)
 
         _images.append(image)
-        _labels.append([label])
+        _labels.append(label)
 
         _count += 1
 
@@ -163,7 +163,7 @@ def GenerateDatasetIRN(flag, image_num):
 
         _images1.append(i1)
         _images2.append(i2)
-        _labels.append([label])
+        _labels.append(label)
 
         _count += 1
 
