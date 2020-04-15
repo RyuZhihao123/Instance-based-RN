@@ -14,11 +14,9 @@ if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,
 
 ### 2. Example:
 
-We provide 2 versions of code: one is the [Code_RunOnce](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_RunOnce) that only run the experiments **once**; the other is [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) that could automatically run the network **5 times by default** and **compute the average and SD of MSE and MLAE**. For quick experiments, we could only focus on [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times). 
+For quick experiments, we provide [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) to automatically run the network **5 times by default** and **compute the average and SD of MSE and MLAE**.
 
 I'll take **Task1.1 Pie3_6** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times/Task1_ourNewTasks/Pie3_6) as an example to show how to use the codes. Dataset will re-generated before training each time, 
-
-* ** ** 
 
 ```
 python Net_VGG.py    --gpu 0 (--times 5)
@@ -27,6 +25,11 @@ python Net_RN_seg.py --gpu 2 (--times 5)
 python Net_IRNm.py   --gpu 3 (--times 5)  or python Net_IRNp.py   --gpu 3 (--times 5)
 ```
 
+if you need to obtain some sample images of dataset, you could run the script as follows to generate a small dataset in current path './datasets/' that contains 600/200/200 training/val/test sets.
+
+```
+python Dataset_generator.py
+```
 
 ### 3. Our network structure:
 
