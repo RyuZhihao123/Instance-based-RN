@@ -54,7 +54,7 @@ def Build_RN_Network():
     # input layers.
     input_layers = []
     for i in range(2):
-        input = Input(shape=(config.image_height, config.image_width, 3), name="input_{}".format(i))
+        input = Input(shape=(config.image_height, config.image_width, 1), name="input_{}".format(i))
         input_layers.append(input)
 
     # First extract individual features.
@@ -183,18 +183,7 @@ if __name__ == '__main__':
                                                                                  val_iter_loss))
             history_iter.append([iter, train_iter_loss, val_iter_loss])
 
-
-            # to avoid stuck in local optimum at the beginning
             iter += 1
-            if iter >= 20 and train_iter_loss > 0.03:
-                history_iter.clear()
-                history_batch.clear()
-                best_train_loss = best_val_loss = 999999.
-
-                model = Build_RN_Network()  # reset the network.
-                model.compile(loss='mse', optimizer=m_optimizer)
-                iter = 0
-                continue
 
             if val_iter_loss < best_val_loss:  # save the best model on Validation set.
                 RemoveDir(best_model_name)

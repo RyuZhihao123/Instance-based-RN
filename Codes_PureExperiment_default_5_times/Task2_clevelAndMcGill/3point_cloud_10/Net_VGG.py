@@ -143,17 +143,7 @@ if __name__ == '__main__':
                                                                                  val_iter_loss))
             history_iter.append([iter, train_iter_loss, val_iter_loss])
 
-            # to avoid stuck in local optimum at the beginning
             iter += 1
-            if iter >= 20 and train_iter_loss > 0.03:
-                history_iter.clear()
-                history_batch.clear()
-                best_train_loss = best_val_loss = 999999.
-
-                model = VGG()  # reset the network.
-                model.compile(loss='mse', optimizer=m_optimizer)
-                iter = 0
-                continue
 
             if val_iter_loss < best_val_loss:  # save the best model on Validation set.
                 RemoveDir(best_model_name)

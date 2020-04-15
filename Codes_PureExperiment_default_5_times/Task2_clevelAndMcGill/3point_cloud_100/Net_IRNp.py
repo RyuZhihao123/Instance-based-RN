@@ -51,7 +51,7 @@ MakeDir("./results/")
 # Level1 module is to extract the individual features from one instance.
 # Level1 has two NON-LOCAL block.
 def Level1_Module():
-    input = Input(shape=(config.image_height, config.image_width, 3))
+    input = Input(shape=(config.image_height, config.image_width, 1))
     x = Conv2D(32, (3, 3), activation='relu', padding='same')(input)
     x = Conv2D(32, (3, 3), activation='relu', padding='same')(x)
     x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
@@ -68,8 +68,8 @@ def Level1_Module():
 
 # IRN_p module is to estimate the ratio between one pair.
 def Build_IRN_p_Network():
-    inputA = Input(shape=(config.image_height, config.image_width, 3))
-    inputB = Input(shape=(config.image_height, config.image_width, 3))
+    inputA = Input(shape=(config.image_height, config.image_width, 1))
+    inputB = Input(shape=(config.image_height, config.image_width, 1))
 
     level1 =Level1_Module()    # build a level1 module
     a = level1(inputA)         # extract two individual features.
@@ -182,7 +182,7 @@ if __name__ == '__main__':
 
             # to avoid stuck in local optimum at the beginning
             iter += 1
-            if iter >= 20 and train_iter_loss > 0.03:
+            if iter >= 15 and best_train_loss > 0.03:
                 history_iter.clear()
                 history_batch.clear()
                 best_train_loss = best_val_loss = 999999.
