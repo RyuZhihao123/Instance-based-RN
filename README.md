@@ -25,16 +25,8 @@ python Net_VGG.py    --gpu 0 (--times 5)
 python Net_RN.py     --gpu 1 (--times 5)
 python Net_RN_seg.py --gpu 2 (--times 5)
 python Net_IRNm.py   --gpu 3 (--times 5)  or python Net_IRNp.py   --gpu 3 (--times 5)
-
 ```
 
-* **Second, run a network.** This command will train and test the `IRN_m` network. When training step is finished, the training informations(MLAE, MSE and histories etc.), best model(on val sets) and the predicted results can be obtained in folder `./results/IRN_m`.
-
-```
-python3.6 Net_IRNm.py --gpu 2 (--savedir IRNm_03)      # GPU ID ( target directory: ./results/IRNm_03)
-```
-
-<div align=center><img width="650" src="https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles.png"/></div>
 
 ### 3. Our network structure:
 
