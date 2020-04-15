@@ -21,7 +21,11 @@ I'll take **Task1.1 Pie3_6** [(codes)](https://github.com/RyuZhihao123/Instance-
 * ** ** 
 
 ```
-python3.6 Dataset_generator.py
+python Net_VGG.py    --gpu 0 (--times 5)
+python Net_RN.py     --gpu 1 (--times 5)
+python Net_RN_seg.py --gpu 2 (--times 5)
+python Net_IRNm.py   --gpu 3 (--times 5)  or python Net_IRNp.py   --gpu 3 (--times 5)
+
 ```
 
 * **Second, run a network.** This command will train and test the `IRN_m` network. When training step is finished, the training informations(MLAE, MSE and histories etc.), best model(on val sets) and the predicted results can be obtained in folder `./results/IRN_m`.
