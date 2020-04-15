@@ -14,7 +14,7 @@ if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,
 
 ### 2. Example:
 
-We provide 2 versions of code: one is the [Code_RunOnce](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_RunOnce) that only run the experiments **once**; the other is [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) that could run the network **5 times by default**. For quick experiments, we could only focus on [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times). 
+We provide 2 versions of code: one is the [Code_RunOnce](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_RunOnce) that only run the experiments **once**; the other is [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) that could directly run the network **5 times by default** and **compute the average and SD of MSE and MLAE**. For quick experiments, we could only focus on [Code_PureExperiments](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times). 
 
 I'll take **Task1.1 Pie3_6** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times/Task1_ourNewTasks/Pie3_6) as an example to show how to use the codes. Dataset will re-generated before training each time, 
 
