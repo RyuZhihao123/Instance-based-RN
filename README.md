@@ -1,6 +1,6 @@
 # Instance-based-RN
 
-We designed a **IRN_m network** for multi-objects ratio tasks, and **IRN_p network** for pair-ratio estimation tasks. 
+We designed an **IRN_m network** for multi-objects ratio tasks, and an **IRN_p network** for pair-ratio estimation tasks. 
 
 if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,^).
 
@@ -10,10 +10,11 @@ if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,
 
 * **Recommended Env.** Python3.6, Tensorflow1.14.0, Keras 2.2.4.
 
-* **Neccessary libaries:** numpy, opencv-python, argparse, scikit-learn,openpyxl
+* **Neccessary libaries:** numpy, opencv-python, argparse, scikit-learn, openpyxl, pickle.
 
 ### 2. Example:
 
+I provide 2 kinds of codes: one is the [(Code_RunOnce)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_RunOnce) that only run the experiments once; the other is [(Code_RunOnce)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Codes_PureExperiment_default_5_times) 
 I'll take **Task1.1 PieNumber** [(codes)](https://github.com/RyuZhihao123/Instance-based-RN/tree/master/Task1_ourNewTasks/PieNumber)  as an example to show how to use the codes.
 
 * **First, create your own datasets.** The following command will create a `./datasets` folder in current path.
