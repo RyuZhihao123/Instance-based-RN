@@ -8,7 +8,7 @@ from Configure import Config, GetProcessBar, ReadLinesInFile, ClearDir, MakeDir,
 import time, argparse, os, cv2, keras, sklearn
 from utils.model_rn import ModelRN
 from Dataset_generator import GenerateDatasetVGG,GenerateDatasetIRN
-import pickle
+import pickle, math
 from keras import backend as K
 
 
@@ -57,9 +57,17 @@ def SavePredictedResult(dir_results, sess, x, y, flag = 'train'):
         predictFile.write('\n')
     predictFile.close()
 
+    # compute the MLAE
     MLAE = np.log2(sklearn.metrics.mean_absolute_error( predict_Y * 100, y[:predict_Y.shape[0]] * 100) + .125)
 
-    return MLAE
+    # compute the ERROR Rate
+    count = 0
+    for i in range(predict_Y.shape[0]):
+        if math.fabs(predict_Y[i] - y[i]) > 0.05:
+            count += 1
+    ERROR = count / predict_Y.shape[0]
+
+    return MLAE, ERROR
 
 if __name__ == '__main__':
 
@@ -146,9 +154,9 @@ if __name__ == '__main__':
         test_loss = model.GetTotalLoss(sess, x_test, y_test, x_test.shape[0])
 
         # Save the predicted results and ground truth.
-        MLAE_train = SavePredictedResult(dir_results, sess, x_train, y_train, 'train')
-        MLAE_val = SavePredictedResult(dir_results, sess, x_val, y_val, 'val')
-        MLAE_test = SavePredictedResult(dir_results, sess, x_test, y_test, 'test')
+        MLAE_train, Error_train = SavePredictedResult(dir_results, sess, x_train, y_train, 'train')
+        MLAE_val, Error_val = SavePredictedResult(dir_results, sess, x_val, y_val, 'val')
+        MLAE_test, Error_test = SavePredictedResult(dir_results, sess, x_test, y_test, 'test')
 
         # save the training information.
         wb = Workbook()
@@ -166,9 +174,14 @@ if __name__ == '__main__':
         ws1.append(["Train loss", best_train_loss])
         ws1.append(["Val loss", best_val_loss])
         ws1.append(["Test loss", test_loss])
+        ws1.append(["-----------------------"])
         ws1.append(["Train MLAE", MLAE_train])
         ws1.append(["val MLAE", MLAE_val])
         ws1.append(["Test MLAE", MLAE_test])
+        ws1.append(["-----------------------"])
+        ws1.append(["Train Error rate", Error_train])
+        ws1.append(["val Error rate", Error_val])
+        ws1.append(["Test Error rate", Error_test])
 
         wb.save(dir_results + "train_info.xlsx")
 
@@ -191,6 +204,10 @@ if __name__ == '__main__':
         stats['MLAE_val'] = MLAE_val
         stats['MLAE_test'] = MLAE_test
 
+        stats['ErrorRate_train'] = Error_train
+        stats['ErrorRate_val'] = Error_val
+        stats['ErrorRate_test'] = Error_test
+
         stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
         stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
 
@@ -200,12 +217,15 @@ if __name__ == '__main__':
 
         exp_id += 1
 
-    # compute average MLAE, MSE and SD.
+        # compute average MLAE, MSE and SD.
     MLAE_trains = []
     MLAE_tests = []
 
     MSE_trains = []
     MSE_tests = []
+
+    ErrorRate_trains = []
+    ErrorRate_tests = []
 
     for exp_id in range(a.times):
         with open(dir_rootpath + "{}_{}.p".format(a.savedir, exp_id), 'rb') as f:
@@ -215,12 +235,10 @@ if __name__ == '__main__':
             MLAE_tests.append(stats['MLAE_test'])
             MSE_trains.append(stats['MSE_train'])
             MSE_tests.append(stats['MSE_test'])
+            ErrorRate_trains.append(stats['ErrorRate_train'])
+            ErrorRate_tests.append(stats['ErrorRate_test'])
 
             f.close()
-    # print(MSE_trains)
-    # print(MSE_tests)
-    # print(MLAE_trains)
-    # print(MLAE_tests)
 
     with open(dir_rootpath + "{}_avg.p".format(a.savedir), 'wb') as f:
         stats = dict()
@@ -235,6 +253,8 @@ if __name__ == '__main__':
         stats['MLAE_train_SD'] = np.std(MLAE_trains)
         stats['MLAE_test_SD'] = np.std(MLAE_tests)
 
+        stats['ErrorRate_train_avg'] = np.average(ErrorRate_trains)
+        stats['ErrorRate_test_avg'] = np.average(ErrorRate_tests)
         pickle.dump(stats, f)
 
         f.close()
