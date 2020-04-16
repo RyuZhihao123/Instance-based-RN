@@ -187,7 +187,7 @@ if __name__ == '__main__':
 
             # to avoid stuck in local optimum at the beginning
             iter += 1
-            if iter >= 10 and best_train_loss > 0.05:
+            if iter >= 10 and best_train_loss > 0.02:
                 history_iter.clear()
                 history_batch.clear()
                 best_train_loss = best_val_loss = 999999.
