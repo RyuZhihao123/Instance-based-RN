@@ -38,6 +38,8 @@ For most tasks, we store the `best model` that obtains the lowest loss on `val_s
 
 * ``RN_avg.p``: the pickle files that summarize all experiments. It contains the ``average`` and ``SD`` of MSE and MLAE of train/test sets.
 
+* **Note I also compute the ERROR RATE in POINT CLOUOD tasks which could be obtained in its pickle files.**
+
 ![](https://github.com/RyuZhihao123/Instance-based-RN/blob/master/image/OutputFiles_common.png)
 
 However, we also have some generalization tasks whose training and test set have different features, e.g, ``PieNumber``, ``PieLineWidth`` and ``PieColor``. In these conditions, we not only store the `best results` that obtains the lowest loss on `val_set`， but also store the `best results` on `train_set`. **That's because ``VGG`` and ``RN`` can only fit the train_set well, but cannot fit the val_set and test_set.** If we observe the loss curve of VGG in `PieColor_fixedTrain` or RN in `PieLineWidth` tasks, we could find it's possible that the val_loss have got the lowest value whereas the train_loss still didn't converge. That's because the network optimized only on train_set, and the val_set is totally different from train_set. So the val_loss don't have any relation with train_loss. Thererfore, I store both two results to show the best performance that the network can achieve on train_set and val_set respectively.
