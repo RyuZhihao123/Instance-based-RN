@@ -10,7 +10,7 @@ if you meet any problem or bug, please tell me (liuzh96@outlook.com)  thanks (^,
 
 * **Recommended Env.** Python3.6, Tensorflow1.14.0, Keras 2.2.4.
 
-* **Neccessary libaries:** numpy, opencv-python, argparse, scikit-learn, openpyxl, pickle.
+* **Neccessary libaries:** numpy, opencv-python, argparse, scikit-learn, openpyxl, pickle, matplotlib.
 
 ### 2. Example:
 
