@@ -101,14 +101,7 @@ def SavePredictedResult(dir_results, x1,x2, y, flag = 'train'):
     # compute the MLAE
     MLAE = np.log2(sklearn.metrics.mean_absolute_error( predict_Y * 100, y * 100) + .125)
 
-    # compute the ERROR Rate
-    count = 0
-    for i in range(predict_Y.shape[0]):
-        if math.fabs(predict_Y[i] - y[i]) > 0.05:
-            count +=1
-    ERROR = count/predict_Y.shape[0]
-
-    return MLAE, ERROR
+    return MLAE, y, predict_Y
 
 if __name__ == '__main__':
 
@@ -192,9 +185,22 @@ if __name__ == '__main__':
                 history_batch.clear()
                 best_train_loss = best_val_loss = 999999.
 
+                del model, x1_train, x2_train, y_train, x1_val, x2_val, y_val, x1_test, x2_test, y_test
                 model = Build_IRN_p_Network()  # reset the network.
                 model.compile(loss='mse', optimizer=m_optimizer)
                 iter = 0
+
+                x1_train, x2_train, y_train = GenerateDatasetIRN('train', train_num)
+                x1_val, x2_val, y_val = GenerateDatasetIRN('val', val_num)
+                x1_test, x2_test, y_test = GenerateDatasetIRN('test', test_num)
+
+                ##  normalize to [-0.5, 0.5]
+                x1_train -= .5
+                x2_train -= .5
+                x1_val -= .5
+                x2_val -= .5
+                x1_test -= .5
+                x2_test -= .5
                 continue
 
             if val_iter_loss < best_val_loss:  # save the best model on Validation set.
@@ -211,9 +217,9 @@ if __name__ == '__main__':
         test_loss = model.evaluate([x1_test, x2_test], y_test, verbose=0, batch_size=m_batchSize)
 
         # Save the predicted results,and return the MALE
-        MLAE_train, Error_train = SavePredictedResult(dir_results, x1_train, x2_train, y_train, 'train')
-        MLAE_val, Error_val = SavePredictedResult(dir_results, x1_val, x2_val, y_val, 'val')
-        MLAE_test, Error_test = SavePredictedResult(dir_results, x1_test, x2_test, y_test, 'test')
+        MLAE_train,_,_ = SavePredictedResult(dir_results, x1_train, x2_train, y_train, 'train')
+        MLAE_val,_,_ = SavePredictedResult(dir_results, x1_val, x2_val, y_val, 'val')
+        MLAE_test, _y_test, _y_pred = SavePredictedResult(dir_results, x1_test, x2_test, y_test, 'test')
 
         # save the training information.
         wb = Workbook()
@@ -235,10 +241,6 @@ if __name__ == '__main__':
         ws1.append(["Train MLAE", MLAE_train])
         ws1.append(["val MLAE", MLAE_val])
         ws1.append(["Test MLAE", MLAE_test])
-        ws1.append(["-----------------------"])
-        ws1.append(["Train Error rate", Error_train])
-        ws1.append(["val Error rate", Error_val])
-        ws1.append(["Test Error rate", Error_test])
 
         wb.save(dir_results + "train_info.xlsx")
 
@@ -252,6 +254,12 @@ if __name__ == '__main__':
         ## save as pickle file
         stats = dict()
 
+        stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
+        stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
+
+        stats['y_test'] = _y_test[..., np.newaxis]
+        stats['y_pred'] = _y_pred
+
         stats['MSE_train'] = best_train_loss
         stats['MSE_val'] = best_val_loss
         stats['MSE_test'] = test_loss
@@ -259,13 +267,6 @@ if __name__ == '__main__':
         stats['MLAE_train'] = MLAE_train
         stats['MLAE_val'] = MLAE_val
         stats['MLAE_test'] = MLAE_test
-
-        stats['ErrorRate_train'] = Error_train
-        stats['ErrorRate_val'] = Error_val
-        stats['ErrorRate_test'] = Error_test
-
-        stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
-        stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
 
         with open(dir_rootpath + "{}_{}.p".format(a.savedir, exp_id), 'wb') as f:
             pickle.dump(stats, f)
@@ -280,9 +281,6 @@ if __name__ == '__main__':
     MSE_trains = []
     MSE_tests = []
 
-    ErrorRate_trains = []
-    ErrorRate_tests  = []
-
     for exp_id in range(a.times):
         with open(dir_rootpath + "{}_{}.p".format(a.savedir, exp_id), 'rb') as f:
             stats = pickle.load(f)
@@ -291,8 +289,6 @@ if __name__ == '__main__':
             MLAE_tests.append(stats['MLAE_test'])
             MSE_trains.append(stats['MSE_train'])
             MSE_tests.append(stats['MSE_test'])
-            ErrorRate_trains.append(stats['ErrorRate_train'])
-            ErrorRate_tests.append(stats['ErrorRate_test'])
 
             f.close()
 
@@ -309,8 +305,6 @@ if __name__ == '__main__':
         stats['MLAE_train_SD'] = np.std(MLAE_trains)
         stats['MLAE_test_SD'] = np.std(MLAE_tests)
 
-        stats['ErrorRate_train_avg'] = np.average(ErrorRate_trains)
-        stats['ErrorRate_test_avg'] = np.average(ErrorRate_tests)
         pickle.dump(stats, f)
 
         f.close()

@@ -109,7 +109,7 @@ def SavePredictedResult(dir_results, x, y, flag = 'train'):
 
     MLAE = np.log2(sklearn.metrics.mean_absolute_error( predict_Y * 100, y * 100) + .125)
 
-    return MLAE
+    return MLAE, y, predict_Y
 
 if __name__ == '__main__':
     dir_rootpath = os.path.abspath(".") + "/results/{}/".format(a.savedir)    # ./results/network_name/
@@ -184,17 +184,8 @@ if __name__ == '__main__':
             history_iter.append([iter, epoch_loss_train, epoch_loss_val])
             print("----- epoch({}/{}) train_loss={}, val_loss={}".format(iter, m_epoch, epoch_loss_train, epoch_loss_val))
 
-            # to avoid stuck in local optimum at the beginning
-            iter += 1
-            if iter >= 20 and epoch_loss_train > 0.03:
-                history_iter.clear()
-                history_batch.clear()
-                best_train_loss = best_val_loss = 999999.
 
-                model = Build_RN_Network()
-                model.compile(loss='mse', optimizer=m_optimizer)
-                iter = 0
-                continue
+            iter += 1
 
             if epoch_loss_val < best_val_loss:  # save the best model on Validation set.
                 RemoveDir(best_model_name)
@@ -208,9 +199,9 @@ if __name__ == '__main__':
         test_loss = model.evaluate(x_test, y_test, verbose=0, batch_size=m_batchSize)
 
         # Save the predicted results and return the MLAE.
-        MLAE_train = SavePredictedResult(dir_results, x_train, y_train, 'train')
-        MLAE_val = SavePredictedResult(dir_results, x_val, y_val, 'val')
-        MLAE_test = SavePredictedResult(dir_results, x_test, y_test, 'test')
+        MLAE_train,_,_ = SavePredictedResult(dir_results, x_train, y_train, 'train')
+        MLAE_val,_,_ = SavePredictedResult(dir_results, x_val, y_val, 'val')
+        MLAE_test, _y_test, _y_pred = SavePredictedResult(dir_results, x_test, y_test, 'test')
 
         # save the training information.
         wb = Workbook()
@@ -257,6 +248,9 @@ if __name__ == '__main__':
 
         stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
         stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
+
+        stats['y_test'] = _y_test
+        stats['y_pred'] = _y_pred
 
         with open(dir_rootpath + "{}_{}.p".format(a.savedir, exp_id), 'wb') as f:
             pickle.dump(stats, f)

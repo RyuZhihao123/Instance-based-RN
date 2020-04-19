@@ -103,7 +103,7 @@ def SavePredictedResult(dir_results, x1,x2, y, flag = 'train'):
 
     MLAE = np.log2(sklearn.metrics.mean_absolute_error( predict_Y * 100, y * 100) + .125)
 
-    return MLAE
+    return MLAE, y, predict_Y
 
 if __name__ == '__main__':
 
@@ -182,7 +182,7 @@ if __name__ == '__main__':
 
             # to avoid stuck in local optimum at the beginning
             iter += 1
-            if iter >= 20 and train_iter_loss > 0.03:
+            if iter >= 20 and best_train_loss > 0.05:
                 history_iter.clear()
                 history_batch.clear()
                 best_train_loss = best_val_loss = 999999.
@@ -206,9 +206,9 @@ if __name__ == '__main__':
         test_loss = model.evaluate([x1_test, x2_test], y_test, verbose=0, batch_size=m_batchSize)
 
         # Save the predicted results,and return the MALE
-        MLAE_train = SavePredictedResult(dir_results, x1_train, x2_train, y_train, 'train')
-        MLAE_val = SavePredictedResult(dir_results, x1_val, x2_val, y_val, 'val')
-        MLAE_test = SavePredictedResult(dir_results, x1_test, x2_test, y_test, 'test')
+        MLAE_train,_,_ = SavePredictedResult(dir_results, x1_train, x2_train, y_train, 'train')
+        MLAE_val,_,_ = SavePredictedResult(dir_results, x1_val, x2_val, y_val, 'val')
+        MLAE_test, _y_test, _y_pred = SavePredictedResult(dir_results, x1_test, x2_test, y_test, 'test')
 
         # save the training information.
         wb = Workbook()
@@ -242,6 +242,12 @@ if __name__ == '__main__':
         ## save as pickle file
         stats = dict()
 
+        stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
+        stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
+
+        stats['y_test'] = _y_test
+        stats['y_pred'] = _y_pred
+
         stats['MSE_train'] = best_train_loss
         stats['MSE_val'] = best_val_loss
         stats['MSE_test'] = test_loss
@@ -249,9 +255,6 @@ if __name__ == '__main__':
         stats['MLAE_train'] = MLAE_train
         stats['MLAE_val'] = MLAE_val
         stats['MLAE_test'] = MLAE_test
-
-        stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
-        stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
 
         with open(dir_rootpath + "{}_{}.p".format(a.savedir, exp_id), 'wb') as f:
             pickle.dump(stats, f)

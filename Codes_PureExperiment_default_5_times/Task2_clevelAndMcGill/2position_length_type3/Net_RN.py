@@ -59,7 +59,7 @@ def SavePredictedResult(dir_results, sess, x, y, flag = 'train'):
 
     MLAE = np.log2(sklearn.metrics.mean_absolute_error( predict_Y * 100, y[:predict_Y.shape[0]] * 100) + .125)
 
-    return MLAE
+    return MLAE, y[:predict_Y.shape[0]], predict_Y
 
 if __name__ == '__main__':
 
@@ -131,23 +131,7 @@ if __name__ == '__main__':
                                                                                 val_iter_loss))
             history_iter.append([iter, train_iter_loss, val_iter_loss])
 
-            # to avoid stuck in local optimum at the beginning
             iter += 1
-            if iter >= 20 and train_iter_loss > 0.05:
-                history_iter.clear()
-                history_batch.clear()
-                best_train_loss = best_val_loss = 999999.
-
-                sess.close()
-                tf.reset_default_graph()
-                model = ModelRN(learning_rate=a.lr, batch_size=m_batchSize, c_dim=3, a_dim=1)
-                init = tf.global_variables_initializer()
-                sess = tf.Session()
-                sess.run(init)
-
-                saver = tf.train.Saver(max_to_keep=1)
-                iter = 0
-                continue
 
             if val_iter_loss < best_val_loss:  # save the best model on Validation set.
                 best_model_name = dir_results + "model_RN_onVal_{}.ckpt".format(val_iter_loss)
@@ -162,9 +146,9 @@ if __name__ == '__main__':
         test_loss = model.GetTotalLoss(sess, x_test, y_test, x_test.shape[0])
 
         # Save the predicted results and ground truth.
-        MLAE_train = SavePredictedResult(dir_results, sess, x_train, y_train, 'train')
-        MLAE_val = SavePredictedResult(dir_results, sess, x_val, y_val, 'val')
-        MLAE_test = SavePredictedResult(dir_results, sess, x_test, y_test, 'test')
+        MLAE_train,_,_ = SavePredictedResult(dir_results, sess, x_train, y_train, 'train')
+        MLAE_val,_,_ = SavePredictedResult(dir_results, sess, x_val, y_val, 'val')
+        MLAE_test, _y_test, _y_pred = SavePredictedResult(dir_results, sess, x_test, y_test, 'test')
 
         # save the training information.
         wb = Workbook()
@@ -199,6 +183,12 @@ if __name__ == '__main__':
         ## save as pickle file
         stats = dict()
 
+        stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
+        stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
+
+        stats['y_test'] = _y_test
+        stats['y_pred'] = _y_pred
+
         stats['MSE_train'] = best_train_loss
         stats['MSE_val'] = best_val_loss
         stats['MSE_test'] = test_loss
@@ -206,9 +196,6 @@ if __name__ == '__main__':
         stats['MLAE_train'] = MLAE_train
         stats['MLAE_val'] = MLAE_val
         stats['MLAE_test'] = MLAE_test
-
-        stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
-        stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
 
         with open(dir_rootpath + "{}_{}.p".format(a.savedir, exp_id), 'wb') as f:
             pickle.dump(stats, f)
@@ -233,10 +220,6 @@ if __name__ == '__main__':
             MSE_tests.append(stats['MSE_test'])
 
             f.close()
-    # print(MSE_trains)
-    # print(MSE_tests)
-    # print(MLAE_trains)
-    # print(MLAE_tests)
 
     with open(dir_rootpath + "{}_avg.p".format(a.savedir), 'wb') as f:
         stats = dict()

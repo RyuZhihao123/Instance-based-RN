@@ -60,7 +60,7 @@ def SavePredictedResult(dir_results, sess, x, y, flag = 'train'):
 
     MLAE = np.log2(sklearn.metrics.mean_absolute_error( predict_Y * 100, y[:predict_Y.shape[0]] * 100) + .125)
 
-    return MLAE
+    return MLAE, y[:predict_Y.shape[0]], predict_Y
 
 if __name__ == '__main__':
 
@@ -140,24 +140,8 @@ if __name__ == '__main__':
                                                                                 val_iter_loss))
             history_iter.append([iter, train_iter_loss, val_iter_loss])
 
-            # to avoid stuck in local optimum at the beginning
+
             iter += 1
-            if iter >= 20 and train_iter_loss > 0.05:
-                history_iter.clear()
-                history_batch.clear()
-                best_train_loss = best_val_loss = val_loss_using_Train = 999999.
-
-                sess.close()
-                tf.reset_default_graph()
-                model = ModelRN(learning_rate=a.lr, batch_size=m_batchSize, c_dim=3, a_dim=config.max_obj_num)
-                init = tf.global_variables_initializer()
-                sess = tf.Session()
-                sess.run(init)
-
-                saver = tf.train.Saver(max_to_keep=1)
-                saver_val = tf.train.Saver(max_to_keep=1)
-                iter = 0
-                continue
 
             # For generalization task, we save both the best models on training set and on validation set.
             # since this network couldn't get good result on validation sets.
@@ -182,16 +166,16 @@ if __name__ == '__main__':
         test_loss_usingTrain = model.GetTotalLoss(sess, x_test, y_test, x_test.shape[0])
 
         # Save the predicted results and ground truth.
-        MLAE_train = SavePredictedResult(dir_results, sess, x_train, y_train, 'trainset_usingTrain')
-        MLAE_val = SavePredictedResult(dir_results, sess, x_val, y_val, 'valset_usingTrain')
-        MLAE_test = SavePredictedResult(dir_results, sess, x_test, y_test, 'testset_usingTrain')
+        MLAE_train,_,_ = SavePredictedResult(dir_results, sess, x_train, y_train, 'trainset_usingTrain')
+        MLAE_val,_,_ = SavePredictedResult(dir_results, sess, x_val, y_val, 'valset_usingTrain')
+        MLAE_test,_,_ = SavePredictedResult(dir_results, sess, x_test, y_test, 'testset_usingTrain')
 
         saver_val.restore(sess, best_model_name_onVal)
         train_loss_onVal = model.GetTotalLoss(sess, x_train, y_train, x_train.shape[0])
         test_loss_onVal = model.GetTotalLoss(sess, x_test, y_test, x_test.shape[0])
-        MLAE_train_onVal = SavePredictedResult(dir_results, sess, x_train, y_train, 'trainset_usingVal')
-        MLAE_val_onVal = SavePredictedResult(dir_results, sess, x_val, y_val, 'valset_usingVal')
-        MLAE_test_onVal = SavePredictedResult(dir_results, sess, x_test, y_test, 'testset_usingVal')
+        MLAE_train_onVal,_,_ = SavePredictedResult(dir_results, sess, x_train, y_train, 'trainset_usingVal')
+        MLAE_val_onVal,_,_ = SavePredictedResult(dir_results, sess, x_val, y_val, 'valset_usingVal')
+        MLAE_test_onVal, _y_test, _y_pred = SavePredictedResult(dir_results, sess, x_test, y_test, 'testset_usingVal')
 
         # save the training information.
         wb = Workbook()
@@ -262,6 +246,9 @@ if __name__ == '__main__':
         stats['Results_using_BestModel_OnTrainSet'] = stats_usingTrain
         stats['loss_train'] = [history_iter[i][1] for i in range(len(history_iter))]
         stats['loss_val'] = [history_iter[i][2] for i in range(len(history_iter))]
+
+        stats['y_test'] = _y_test
+        stats['y_pred'] = _y_pred
 
         with open(dir_rootpath + "{}_{}.p".format(a.savedir, exp_id), 'wb') as f:
             pickle.dump(stats, f)
