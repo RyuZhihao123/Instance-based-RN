@@ -16,7 +16,7 @@ cd $CRTDIR; cd $basicpath; cd "2position_length_multi/" ; python3.6 Net_VGG.py -
 cd $CRTDIR; cd $basicpath; cd "2position_length_type1/" ; python3.6 Net_VGG.py --gpu $gpuid --times $times
 cd $CRTDIR; cd $basicpath; cd "2position_length_type2/" ; python3.6 Net_VGG.py --gpu $gpuid --times $times
 
-cd $CRTDIR; cd $basicpath; cd "Bar3_12/" ; python3.6 Net_VGG.py --gpu $gpuid --times $times
+cd $CRTDIR; cd "Task1_ourNewTasks/"; cd "Bar3_12/" ; python3.6 Net_VGG.py --gpu $gpuid --times $times
 
 
 

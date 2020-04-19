@@ -23,7 +23,7 @@ cd $CRTDIR; cd $basicpath; cd "3point_cloud_10/" ; python3.6 Net_RN.py --gpu $gp
 cd $CRTDIR; cd $basicpath; cd "3point_cloud_100/" ; python3.6 Net_RN.py --gpu $gpuid --times $times
 cd $CRTDIR; cd $basicpath; cd "3point_cloud_1000/" ; python3.6 Net_RN.py --gpu $gpuid --times $times
 
-cd $CRTDIR; cd $basicpath; cd "Pie3_12/" ; python3.6 Net_RN_seg.py --gpu $gpuid --times $times
+cd $CRTDIR; cd "Task1_ourNewTasks/"; cd "Pie3_12/" ; python3.6 Net_RN_seg.py --gpu $gpuid --times $times
 
 
 echo " Omedetou !!  [GPU2] has done all the works."
