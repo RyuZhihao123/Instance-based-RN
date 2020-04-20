@@ -52,7 +52,7 @@ MakeDir("./results/")
 # Level1 module is to extract the individual features from one instance.
 # Level1 has two NON-LOCAL block.
 def Level1_Module():
-    input = Input(shape=(config.image_height, config.image_width, 3))
+    input = Input(shape=(config.image_height, config.image_width, 1))
     x = Conv2D(32, (3, 3), activation='relu', padding='same')(input)
     x = Conv2D(32, (3, 3), activation='relu', padding='same')(x)
     x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
@@ -95,7 +95,7 @@ def Build_IRN_m_Network():
     input_layers = []
     # the first 'obj_num' inputs are corresponding to the input sub-charts.
     for i in range(config.max_obj_num):
-        input = Input(shape=(config.image_height, config.image_width, 3), name="input_{}".format(i))
+        input = Input(shape=(config.image_height, config.image_width, 1), name="input_{}".format(i))
         input_layers.append(input)
 
     # The last input layer is used for representing R1=(o1/o1)=1.0 which is just a constant.

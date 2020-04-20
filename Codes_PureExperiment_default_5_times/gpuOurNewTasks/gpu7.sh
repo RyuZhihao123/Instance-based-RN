@@ -16,6 +16,9 @@ cd $CRTDIR; cd $basicpath; cd "PieLineWidth/" ; python3.6 Net_VGG.py --gpu $gpui
 cd $CRTDIR; cd $basicpath; cd "PieNumber/" ; python3.6 Net_VGG.py --gpu $gpuid --times $times
 
 
+cd $CRTDIR; cd $basicpath; cd "BarLineWidth/" ; python3.6 Net_VGG.py --gpu $gpuid --times $times
+
+
 echo " Omedetou !!  [GPU7] has done all the works."
 echo " Omedetou !!  [GPU7] has done all the works."
 echo " Omedetou !!  [GPU7] has done all the works."

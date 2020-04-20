@@ -127,7 +127,7 @@ def GenerateDatasetVGG(flag, image_num):
 def GenerateDatasetIRNm(flag, image_num):
     print("Generating {} Dataset: {} ----------------".format(str.upper(flag), image_num))
 
-    _images = np.ones((config.max_obj_num, image_num, config.image_height, config.image_width, 3), dtype='float32')
+    _images = np.ones((config.max_obj_num, image_num, config.image_height, config.image_width, 1), dtype='float32')
     _labels = []
 
 
@@ -141,7 +141,7 @@ def GenerateDatasetIRNm(flag, image_num):
             print("   id {} (obj_num = {})".format(i, featureVector.shape[0]))
 
         subimages = [subimages[t][...,np.newaxis] for t in range(config.max_obj_num)]
-        subimages = [np.concatenate((img, img, img), axis=-1) for img in subimages]
+        # subimages = [np.concatenate((img, img, img), axis=-1) for img in subimages]
 
         for t in range(config.max_obj_num):
             _images[t][i] = subimages[t]

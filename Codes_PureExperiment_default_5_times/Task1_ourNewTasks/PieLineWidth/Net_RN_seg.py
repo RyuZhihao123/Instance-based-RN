@@ -53,7 +53,7 @@ def Build_RN_Network():
     # input layers.
     input_layers = []
     for i in range(config.max_obj_num):
-        input = Input(shape=(config.image_height, config.image_width, 3), name="input_{}".format(i))
+        input = Input(shape=(config.image_height, config.image_width, 1), name="input_{}".format(i))
         input_layers.append(input)
 
     # First extract individual features.

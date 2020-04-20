@@ -142,10 +142,10 @@ def GenerateDatasetIRN(flag, image_num):
             print("   id {}".format(_count))
 
         i1 = i1[..., np.newaxis]
-        i1 = np.concatenate((i1,i1,i1), axis=-1)
+        # i1 = np.concatenate((i1,i1,i1), axis=-1)
 
         i2 = i2[..., np.newaxis]
-        i2 = np.concatenate((i2,i2,i2), axis=-1)
+        # i2 = np.concatenate((i2,i2,i2), axis=-1)
 
         _images1.append(i1)
         _images2.append(i2)
