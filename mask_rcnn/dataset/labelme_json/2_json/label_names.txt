@@ -4,3 +4,4 @@ bar2
 bar3
 bar4
 bar5
+bar6

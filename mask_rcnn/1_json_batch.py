@@ -1,7 +1,7 @@
 import os
 import shutil
-path = '.\\maskrcnn\\dataset\\json\\'  # path是你存放json的路径
-path_labelme = ".\\maskrcnn\\dataset\\labelme_json\\"
+path = '.\\dataset\\json\\'  # path是你存放json的路径
+path_labelme = ".\\dataset\\labelme_json\\"
 
 print("start....")
 json_file = os.listdir(path)

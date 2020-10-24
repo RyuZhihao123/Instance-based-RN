@@ -1,8 +1,8 @@
 import shutil
 import os
 
-path_json = ".\\maskrcnn\\dataset\\labelme_json\\"
-path_mask = ".\\maskrcnn\\dataset\\cv2_mask\\"
+path_json = ".\\dataset\\labelme_json\\"
+path_mask = ".\\dataset\\cv2_mask\\"
 
 json_file = os.listdir(path_json)
 for file in json_file:
